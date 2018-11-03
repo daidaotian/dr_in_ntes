@@ -1,3 +1,4 @@
+
 dr edit in 20181103
 # 一级标题
 ## 二级标题1
@@ -21,8 +22,6 @@ dr edit in 20181103
 插入图片
 ![gouguo](https://avatar.csdn.net/7/7/B/1_ralf_hx163com.jpg)
 
-#test
-![myself](https://cl.ly/5e4478699477)
 
 
 插入链接
