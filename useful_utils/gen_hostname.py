@@ -4,12 +4,9 @@
 # 
 import commands
 import sys
+import fileinput
 
-if len(sys.argv)<=2:
-	data = sys.argv[1:]
-	while line=sys.stdin.read():
-		print(line)
-		print(-------)
-else:
-	print("useage1: \tPython %s file_name"%sys.argv[0])
-	print("\t echo "xxx" | %s"%sys.argv[0])
+
+with fileinput.input() as f_input:
+    for line in f_input:
+        print(line, end='')
