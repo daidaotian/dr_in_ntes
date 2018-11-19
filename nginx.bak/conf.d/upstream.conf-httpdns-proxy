@@ -1,0 +1,6 @@
+upstream  httpdns-hz {
+    server 223.252.199.10;
+}
+upstream httpdns-hz-https {
+    server 223.252.199.10:443;
+}

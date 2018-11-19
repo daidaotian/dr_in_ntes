@@ -1,0 +1,9 @@
+# -*- Mode: Nginx -*-
+
+upstream downloadclusters {
+    server 10.164.192.151:8080;
+    server 10.164.192.152:8080;
+}
+upstream mailstat {
+    server 10.164.192.156;
+}

@@ -1,0 +1,202 @@
+upstream webim {
+	server 10.120.104.225:8070;
+	server 10.120.104.226:8070;
+	keepalive 64;
+}
+upstream qrcode {
+	server 10.120.104.227:8080;
+	server 10.120.104.228:8080;
+	keepalive 64;
+}
+upstream pinche {
+	server 10.160.215.105:8080;
+	server 10.160.215.107:8080;
+	server 10.160.215.105:8081;
+	server 10.160.215.107:8081;
+	keepalive 64;
+}
+upstream pinchex {
+	server 10.160.215.108:8088;
+	keepalive 32;
+}
+
+upstream fama {
+	server 10.160.215.103:10183;
+	server 10.160.215.104:10183;
+	keepalive 64;
+}
+upstream yixin {
+    server 10.120.104.51:8080;
+    server 10.120.104.52:8080;
+    keepalive 60;
+}
+upstream mycode {
+    server 10.120.104.147:8481;
+    server 10.120.104.148:8481;
+    keepalive 60;
+}
+upstream yxgz {
+    server 10.120.104.57:8080;
+    keepalive 60;
+}
+upstream sdk {
+    server 10.120.104.111:8886;
+    keepalive 32;
+}
+upstream open {
+    server 10.120.104.135:8181;
+    server 10.120.104.136:8181;
+    keepalive 16;
+}
+upstream push {
+    server 10.120.104.61:5556;
+    server 10.120.104.77:5556;
+    keepalive 16;
+}
+upstream update {
+    server 10.120.104.51:8870;
+    server 10.120.104.52:8870;
+    keepalive 32;
+}
+upstream lbs {
+    #    server 10.120.104.51:8080 weight=10;
+    #    server 10.120.104.52:8080 weight=10;
+    server 10.120.104.170:8180 weight=2;
+    server 10.120.104.171:8180 weight=2;
+    keepalive 32;
+}
+upstream hd {
+    server 10.120.104.132:8550;
+    keepalive 16;
+}
+upstream yxhd {
+    server 10.120.104.51:9393;
+    server 10.120.104.52:9393;
+    keepalive 32;
+}
+upstream qr {
+    server 10.120.104.51:9393;
+    keepalive 32;
+}
+upstream fifawc {
+    server 10.120.104.147:8077;
+    server 10.120.104.148:8077;
+    keepalive 32;
+}
+upstream openrecv {
+    server 10.120.104.147:8381;
+    server 10.120.104.148:8381;
+    keepalive 32;
+}
+upstream sticker {
+	server 10.120.104.132:8660;
+	server 10.120.104.133:8660;
+	keepalive 16;
+}
+upstream sendyixinmsg {
+	server 10.120.104.147:8100;
+	server 10.120.104.148:8100;
+	keepalive 32;
+}
+upstream querymsgid {
+    server 10.120.104.147:8101;
+    server 10.120.104.148:8101;
+    keepalive 32;
+}
+upstream greenroom {
+        server 10.120.104.132:5577;
+        server 10.120.104.133:5577;
+        keepalive 32;
+}
+upstream epromotion {
+        server 10.120.104.132:8890;
+        server 10.120.104.133:8890;
+        keepalive 32;
+}
+upstream spy {
+    server 10.120.104.132:5577;
+    server 10.120.104.133:5577;
+    keepalive 16;
+}
+upstream fc {
+    server 10.120.104.86:8890;
+    server 10.120.104.87:8890;
+    server 10.120.104.88:8890;
+    server 10.120.104.89:8890;
+    keepalive 32;
+}
+upstream map {
+	server 10.120.104.191:5050;
+	server 10.120.104.191:5051;
+	server 10.120.104.192:5050;
+	server 10.120.104.192:5051;
+	keepalive 64;
+}
+upstream promotion {
+	server 10.120.104.132:8890;
+    server 10.120.104.133:8890;
+	keepalive 64;
+}
+upstream mailapi {
+	server 10.120.104.137:8220;
+	server 10.120.104.138:8220;
+	keepalive 64;
+}
+upstream yipay {
+	server 10.120.104.62:8080;
+	keepalive 32;
+}
+upstream openapps {
+	server 10.120.104.137:7770;
+	server 10.120.104.138:7770;
+	keepalive 64;
+}
+upstream ask {
+	server 10.160.215.75:5150;
+	server 10.160.215.76:5150;
+	server 10.160.215.75:5151;
+	server 10.160.215.76:5151;
+	server 10.160.215.75:5152;
+	server 10.160.215.76:5152;
+	keepalive 64;
+}
+upstream fifawc-service {
+	server 10.120.104.132:8076;
+	keepalive 32;
+}
+upstream mirror {
+    server 10.120.104.62:8081;
+    server 10.120.104.133:8081;
+    keepalive 64;
+}
+upstream intra-api {
+    server 10.120.104.164:8382;
+    server 10.120.104.165:8382;
+	keepalive 64;
+}
+
+upstream open-game {
+	ip_hash;
+	server 10.120.104.135:8181;
+	server 10.120.104.136:8181;
+	server 10.120.104.45:8181;
+	server 10.120.104.46:8181;
+	keepalive 64;
+}
+upstream open_rr {
+	server 10.120.104.135:8181;
+	server 10.120.104.136:8181;
+	server 10.120.104.45:8181;
+	server 10.120.104.46:8181;
+	keepalive 64;
+}
+upstream mission {
+    server 10.160.215.58:5051;
+    server 10.160.215.59:5051;
+}
+upstream breakway-yixin {
+    server 10.120.41.249:8181;
+    server 10.120.147.121:8181;
+    server 10.120.146.162:8181;
+    keepalive 16;
+}

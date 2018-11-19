@@ -1,0 +1,10 @@
+upstream c-3g-bj-service {
+    server 10.102.152.152 weight=3 max_fails=5;
+    server 10.102.152.153 weight=3 max_fails=5;
+    server 10.112.142.61 weight=3 max_fails=5;
+    server 10.112.142.60 weight=3 max_fails=5;
+    check interval=5000 rise=2 fall=3 timeout=7000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\nHost: c.3g.163.com\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+

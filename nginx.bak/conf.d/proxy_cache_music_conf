@@ -1,0 +1,7 @@
+proxy_buffering on;
+proxy_temp_path /mnt/ssd/cache/cachemusic_tmp;
+proxy_cache cache_music;
+proxy_cache_methods GET POST;
+proxy_cache_key $uri$is_args$args;
+proxy_cache_use_stale error timeout invalid_header http_500 http_502 http_503 http_504 updating;
+add_header X_cache "$upstream_cache_status from $hostname";

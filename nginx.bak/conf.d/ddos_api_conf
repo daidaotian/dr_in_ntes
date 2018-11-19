@@ -1,0 +1,98 @@
+# ddos related zone
+limit_access_zone zone=ddosblogip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddosbloghost:10M bucket_number=10007 type=$host;
+limit_access_zone zone=ddosbloglocation:10M bucket_number=10007 type=$name_in_location;
+limit_access_variable zone=ddosblogip $blog_access_deny_ip;
+limit_access_variable zone=ddosbloghost $blog_access_deny_host;
+limit_access_variable zone=ddosbloglocation $blog_access_deny_location;
+
+limit_access_zone zone=ddosotherip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddosotherhost:10M bucket_number=10007 type=$host;
+limit_access_zone zone=ddosotherlocation:10M bucket_number=10007 type=$name_in_location;
+limit_access_variable zone=ddosotherip $other_access_deny_ip;
+limit_access_variable zone=ddosotherhost $other_access_deny_host;
+limit_access_variable zone=ddosotherlocation $other_access_deny_location;
+
+limit_access_zone zone=ddosdfsip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddosdfshost:10M bucket_number=10007 type=$host;
+limit_access_zone zone=ddosdfslocation:10M bucket_number=10007 type=$name_in_location;
+limit_access_variable zone=ddosdfsip $dfs_access_deny_ip;
+limit_access_variable zone=ddosdfshost $dfs_access_deny_host;
+limit_access_variable zone=ddosdfslocation $dfs_access_deny_location;
+
+limit_access_zone zone=ddoshaitaoip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddoshaitaohost:10M bucket_number=10007 type=$host;
+limit_access_zone zone=ddoshaitaouri:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddoshaitaoip $haitao_access_deny_ip;
+limit_access_variable zone=ddoshaitaohost $haitao_access_deny_host;
+limit_access_variable zone=ddoshaitaouri $haitao_access_deny_uri;
+
+limit_access_zone zone=ddosmusicip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddosmusicuri:10M bucket_number=10007 type=$uri;
+limit_access_zone zone=ddosmusicuri2:10M bucket_number=10007 type=$uri2;
+limit_access_zone zone=ddosmusicip2:10M bucket_number=10007 type=$http_x_from_ip;
+limit_access_variable zone=ddosmusicip $music_access_deny_ip;
+limit_access_variable zone=ddosmusicuri $music_access_deny_uri;
+limit_access_variable zone=ddosmusicuri2 $music_access_deny_uri2;
+limit_access_variable zone=ddosmusicip2 $music_access_deny_ip2;
+
+limit_access_zone zone=ddosmanhuaip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddosmanhuauri:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddosmanhuaip $manhua_access_deny_ip;
+limit_access_variable zone=ddosmanhuauri $manhua_access_deny_uri;
+
+limit_access_zone zone=ddosyueduip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddosyueduuri:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddosyueduip $yuedu_access_deny_ip;
+limit_access_variable zone=ddosyueduuri $yuedu_access_deny_uri;
+
+limit_access_zone zone=ddosstudyip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddosstudyuri:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddosstudyip $study_access_deny_ip;
+limit_access_variable zone=ddosstudyuri $study_access_deny_uri;
+
+limit_access_zone zone=ddosmstudyip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddosmstudyuri:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddosmstudyip $mstudy_access_deny_ip;
+limit_access_variable zone=ddosmstudyuri $mstudy_access_deny_uri;
+
+limit_access_zone zone=ddosbstudyip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddosbstudyuri:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddosbstudyip $bstudy_access_deny_ip;
+limit_access_variable zone=ddosbstudyuri $bstudy_access_deny_uri;
+
+limit_access_zone zone=ddosicourseip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddosicourseuri:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddosicourseip $icourse_access_deny_ip;
+limit_access_variable zone=ddosicourseuri $icourse_access_deny_uri;
+
+limit_access_zone zone=ddosgachaip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddosgachauri:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddosgachaip $gacha_access_deny_ip;
+limit_access_variable zone=ddosgachauri $gacha_access_deny_uri;
+
+limit_access_zone zone=ddosvcloudip:10M bucket_number=10007 type=ip;
+limit_access_variable zone=ddosvcloudip $vcloud_access_deny_ip;
+
+limit_access_zone zone=ddosuri:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddosuri $limit_access_deny_uri;
+
+limit_access_zone zone=ddosquhuaip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddosquhuauri:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddosquhuaip $quhua_access_deny_ip;
+limit_access_variable zone=ddosquhuauri $quhua_access_deny_uri;
+
+limit_access_zone zone=ddoscdunip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddoscdunuri:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddoscdunip $cdun_access_deny_ip;
+limit_access_variable zone=ddoscdunuri $cdun_access_deny_uri;
+
+limit_access_zone zone=ddosstarip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddosstaruri:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddosstarip $star_access_deny_ip;
+limit_access_variable zone=ddosstaruri $star_access_deny_uri;
+
+limit_access_zone zone=ddoscodecombatip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddoscodecombaturi:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddoscodecombatip $codecombat_access_deny_ip;
+limit_access_variable zone=ddoscodecombaturi $codecombat_access_deny_uri;

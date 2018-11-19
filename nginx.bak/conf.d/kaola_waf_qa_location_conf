@@ -1,0 +1,23 @@
+location ^~ /__to_waf__/ {
+    internal;
+
+    rewrite_by_lua_block {
+        -- remove uri prefix /__to_waf__
+        local uri = ngx.var.uri
+        ngx.req.set_uri(string.sub(uri, 12), false)
+    }
+
+    proxy_pass http://waf;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_connect_timeout 10ms;
+    proxy_read_timeout 300ms;
+}
+
+location ^~ /__waf_page__/ {
+    internal;
+    root /etc/nginx/www-503/;
+}

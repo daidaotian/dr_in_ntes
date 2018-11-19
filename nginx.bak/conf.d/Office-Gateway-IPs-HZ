@@ -1,0 +1,77 @@
+# hangzhou
+allow 59.111.198.100;
+allow 59.111.198.101;
+allow 59.111.198.102;
+allow 123.58.160.131;
+allow 123.58.160.138;
+allow 115.236.174.251; # qingzhiwu
+allow 115.236.174.252; # qingzhiwu
+allow 59.111.198.55;
+allow 59.111.198.56;
+allow 123.58.160.153;
+allow 123.58.160.154;
+allow 123.58.160.155;
+allow 183.136.182.131; # telcom
+allow 59.111.198.133; # yunying
+allow 59.111.21.130;
+allow 59.111.21.131;
+allow 59.111.21.132;
+allow 123.58.191.130;
+allow 123.58.191.131;
+allow 123.58.191.132;
+allow 183.136.182.131;
+allow 183.136.182.135;
+allow 183.136.182.138;
+allow 183.136.182.139;
+allow 183.136.182.140;
+allow 183.136.182.141;
+
+#game online support
+allow 59.111.198.130;
+allow 59.111.198.131;
+allow 59.111.198.132;
+
+#BlZ
+allow 59.111.198.162;
+allow 59.111.198.163;
+
+# quzhou yanxuan
+allow 123.157.99.130;
+
+# officeVpn
+allow 106.2.124.164;
+allow 223.252.202.68;
+allow 115.236.126.35;
+# tunnel3.hz.163.org
+allow 123.58.180.78;
+# hyvpn
+allow 59.111.190.56;
+allow 59.111.239.147;
+
+# private
+allow 127.0.0.1;
+allow 10.0.0.0/8;
+allow 172.16.0.0/12;
+allow 192.168.0.0/16;
+
+#nis vpn device
+allow 59.111.198.47;
+
+# hangzhou2oversea
+allow 103.65.40.46;
+allow 103.65.40.52;
+allow 103.65.40.47;
+allow 103.65.40.43;
+allow 103.65.40.64;
+allow 103.65.40.65;
+allow 103.65.40.98;
+allow 103.65.40.100;
+allow 103.65.40.101;
+allow 103.129.255.249;
+allow 103.129.255.250;
+allow 103.129.255.251;
+allow 103.129.255.252;
+allow 103.129.255.253;
+allow 103.129.255.254;
+
+deny all;

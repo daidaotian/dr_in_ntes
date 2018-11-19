@@ -1,0 +1,634 @@
+# -*- Mode: Nginx -*-
+
+upstream api-epay {
+    server 10.120.82.176:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.82.177:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.82.178:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.82.179:8081 max_fails=3 fail_timeout=30s;
+    server 10.170.200.153:8081 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.171:8081 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.188:8081 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.205:8081 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.222:8081 max_fails=3 fail_timeout=30s backup;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 100;
+}
+
+upstream backend_epay {
+    server 10.130.12.40:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.41:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.42:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.43:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.44:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.45:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.46:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.47:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.48:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.49:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.50:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.51:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.52:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.53:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.54:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.55:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.56:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.57:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.58:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.59:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.60:6801 max_fails=3 fail_timeout=30s;
+    server 10.170.200.29:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.30:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.47:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.48:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.65:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.66:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.83:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.84:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.101:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.102:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.118:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.119:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.120:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.136:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.137:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.138:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.154:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.155:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.156:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.172:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.173:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.174:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.189:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.190:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.191:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.206:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.207:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.208:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.223:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.224:6801 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.225:6801 max_fails=3 fail_timeout=30s backup;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=6801;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 200;
+}
+upstream backend_epayyq {
+    server 10.170.200.29:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.30:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.47:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.48:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.65:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.66:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.83:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.84:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.101:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.102:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.118:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.119:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.120:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.136:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.137:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.138:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.154:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.155:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.156:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.172:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.173:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.174:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.189:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.190:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.191:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.206:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.207:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.208:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.223:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.224:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.170.200.225:6801 max_fails=3 fail_timeout=30s weight=10;
+    server 10.130.12.40:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.41:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.42:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.43:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.44:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.45:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.46:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.47:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.48:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.49:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.50:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.51:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.52:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.53:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.54:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.55:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.56:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.57:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.58:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.59:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    server 10.130.12.60:6801 max_fails=3 fail_timeout=30s weight=40 backup;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=6801;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 120;
+}
+upstream backend_epay_ab {
+    server 10.130.12.65:6801 max_fails=3 fail_timeout=30s;
+    server 10.130.12.66:6801 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=6801;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 200;
+}
+
+upstream backend_epay_mer {
+    server 10.120.83.170:6800 max_fails=3 fail_timeout=30s;
+    server 10.120.83.171:6800 max_fails=3 fail_timeout=30s;
+    server 10.120.83.172:6800 max_fails=3 fail_timeout=30s;
+    server 10.120.83.173:6800 max_fails=3 fail_timeout=30s;
+    server 10.120.83.174:6800 max_fails=3 fail_timeout=30s;
+    check interval=5000 rise=3 fall=3 timeout=10000 type=http port=6801;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+
+    keepalive 200;
+}
+
+upstream backend_epay_promotion_path {
+    server 10.120.83.177:6800 max_fails=3 fail_timeout=30s weight=10;
+    server 10.120.83.178:6800 max_fails=3 fail_timeout=30s weight=10;
+    server 10.120.83.179:6800 max_fails=3 fail_timeout=30s weight=10;
+    server 10.120.83.181:6800 max_fails=3 fail_timeout=30s weight=10;
+    check interval=5000 rise=3 fall=3 timeout=10000 type=http port=6801;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+
+    keepalive 120;
+}
+
+upstream backend_epay_fund {
+    server 10.120.83.125:6800 max_fails=3 fail_timeout=30s weight=10;
+    server 10.120.83.126:6800 max_fails=3 fail_timeout=30s weight=10;
+    server 10.120.83.127:6800 max_fails=3 fail_timeout=30s weight=10;
+    server 10.120.83.128:6800 max_fails=3 fail_timeout=30s weight=10;
+    check interval=5000 rise=3 fall=3 timeout=10000 type=http port=6801;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+
+    keepalive 150;
+}
+
+upstream backend_epay_jf {
+    server 10.120.83.183:26913 max_fails=3 fail_timeout=30s;
+    server 10.120.83.184:26913 max_fails=3 fail_timeout=30s;
+    server 10.120.83.185:26913 max_fails=3 fail_timeout=30s;
+    server 10.120.83.186:26913 max_fails=3 fail_timeout=30s;
+    server 10.170.200.37:26913 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.55:26913 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.231:26913 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.214:26913 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.73:26913 max_fails=3 fail_timeout=30s backup;
+    check interval=5000 rise=3 fall=3 timeout=10000 type=http port=6813;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+
+    keepalive 120;
+}
+
+upstream backend_yixin {
+    server 10.120.83.97:6800 max_fails=3 fail_timeout=30s weight=10;
+    server 10.120.83.98:6800 max_fails=3 fail_timeout=30s weight=10;
+    server 10.120.83.99:6800 max_fails=3 fail_timeout=30s weight=10;
+    server 10.120.83.100:6800 max_fails=3 fail_timeout=30s weight=10;
+    check interval=5000 rise=3 fall=3 timeout=10000 type=http port=6801;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+
+    keepalive 150;
+}
+
+upstream backend_epay_manager_path {
+    server 10.120.83.168:6800 max_fails=3 fail_timeout=30s;
+    server 10.120.83.182:6800 max_fails=3 fail_timeout=30s;
+    check interval=5000 rise=3 fall=3 timeout=10000 type=http port=6801;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+
+    keepalive 512;
+}
+
+upstream backend_groupon {
+    server 10.120.83.141:26933 max_fails=3 fail_timeout=30s;
+    server 10.120.83.142:26933 max_fails=3 fail_timeout=30s;
+
+    keepalive 512;
+}
+
+upstream backend_promotion {
+    sticky name=PROMOTIONJSESSIONID0   path=/;
+    server 10.120.83.177:26944 max_fails=3 fail_timeout=30s;
+    server 10.120.83.178:26944 max_fails=3 fail_timeout=30s;
+    server 10.120.83.179:26944 max_fails=3 fail_timeout=30s;
+    server 10.120.83.181:26944 max_fails=3 fail_timeout=30s;
+
+    check interval=5000 rise=3 fall=3 timeout=10000 type=http port=6804;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+
+    keepalive 512;
+}
+
+upstream backend_help {
+    sticky name=HELPJSESSIONID0   path=/;
+    server 10.120.83.141:26911 max_fails=3 fail_timeout=30s;
+    server 10.120.83.142:26911 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=6825;
+    check_http_send "HEAD /health/status.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 512;
+}
+upstream epayshecdue {
+    server 10.120.82.142:1086;
+    server 10.120.82.143:1086;
+}
+
+upstream backend_athena {
+    sticky name=FUNDROUTE path=/;
+    server 10.120.82.113:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.83.28:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.83.29:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.83.30:8081 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+
+    keepalive 120;
+}
+
+upstream backend_diana_w {
+    server 10.120.82.127:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.82.128:8081 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 120;
+}
+
+upstream backend_slm {
+    server 10.120.78.128:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.78.129:8081 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=10000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 120;
+}
+
+upstream backend_athena_guohua {
+    server 10.120.82.113:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.83.28:8081 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+
+    keepalive 50;
+}
+
+upstream backend_athena_http {
+    server 10.120.82.113:8080 max_fails=3 fail_timeout=30s;
+    server 10.120.83.28:8080 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+
+    keepalive 100;
+}
+
+upstream backend_diana {
+    server 10.120.82.127:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.82.128:8081 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+
+    keepalive 120;
+}
+
+upstream backend_watchman {
+    server 10.120.78.119:8090 max_fails=3 fail_timeout=30s;
+    server 10.120.78.120:8090 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8090;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 120;
+}
+
+upstream backend_gateway {
+    server 10.120.78.119:8090 max_fails=3 fail_timeout=30s;
+    server 10.120.78.120:8090 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8090;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 120;
+}
+
+upstream backend_diana_http {
+    server 10.120.82.127:8080 max_fails=3 fail_timeout=30s;
+    server 10.120.82.128:8080 max_fails=3 fail_timeout=30s;
+    keepalive 100;
+}
+
+upstream backend_platform {
+    server 10.120.82.247:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.82.248:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.82.249:8081 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 120;
+}
+upstream wr.da.netease.com {
+    server 10.120.83.60 max_fails=3 fail_timeout=30s;
+    server 10.120.83.61 max_fails=3 fail_timeout=30s;
+    keepalive 120;
+}
+upstream backend_ares{
+    server 10.120.83.43:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.83.44:8081 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 120;
+}
+
+upstream backend_ares_http{
+    server 10.120.83.43:8080 max_fails=3 fail_timeout=30s;
+    server 10.120.83.44:8080 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 100;
+}
+upstream backend_odin{
+    server 10.120.83.48:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.82.111:8081 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 120;
+}
+
+upstream backend_odin_http{
+    server 10.120.83.48:8080 max_fails=3 fail_timeout=30s;
+    server 10.120.82.111:8080 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 100;
+}
+
+upstream backend_epay_cashier {
+    server 10.130.12.67:8080 max_fails=3 fail_timeout=30s;
+    server 10.130.12.68:8080 max_fails=3 fail_timeout=30s;
+    server 10.130.12.69:8080 max_fails=3 fail_timeout=30s;
+    server 10.130.12.70:8080 max_fails=3 fail_timeout=30s;
+    server 10.130.12.71:8080 max_fails=3 fail_timeout=30s;
+    server 10.130.12.72:8080 max_fails=3 fail_timeout=30s;
+    server 10.130.12.73:8080 max_fails=3 fail_timeout=30s;
+    server 10.130.12.74:8080 max_fails=3 fail_timeout=30s;
+    server 10.170.200.27:8080 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.45:8080 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.63:8080 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.81:8080 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.99:8080 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.117:8080 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.135:8080 max_fails=3 fail_timeout=30s backup;
+    server 10.170.200.221:8080 max_fails=3 fail_timeout=30s backup;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 100;
+}
+upstream backend_epay_cashieryq {
+    server 10.170.200.27:8080 max_fails=3 fail_timeout=30s;
+    server 10.170.200.45:8080 max_fails=3 fail_timeout=30s;
+    server 10.170.200.63:8080 max_fails=3 fail_timeout=30s;
+    server 10.170.200.81:8080 max_fails=3 fail_timeout=30s;
+    server 10.170.200.99:8080 max_fails=3 fail_timeout=30s;
+    server 10.170.200.117:8080 max_fails=3 fail_timeout=30s;
+    server 10.170.200.135:8080 max_fails=3 fail_timeout=30s;
+    server 10.170.200.221:8080 max_fails=3 fail_timeout=30s;
+    server 10.130.12.67:8080 max_fails=3 fail_timeout=30s backup;
+    server 10.130.12.68:8080 max_fails=3 fail_timeout=30s backup;
+    server 10.130.12.69:8080 max_fails=3 fail_timeout=30s backup;
+    server 10.130.12.70:8080 max_fails=3 fail_timeout=30s backup;
+    server 10.130.12.71:8080 max_fails=3 fail_timeout=30s backup;
+    server 10.130.12.72:8080 max_fails=3 fail_timeout=30s backup;
+    server 10.130.12.73:8080 max_fails=3 fail_timeout=30s backup;
+    server 10.130.12.74:8080 max_fails=3 fail_timeout=30s backup;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 100;
+}
+upstream backend_epay_cashierab {
+    server 10.130.12.75:8080 max_fails=3 fail_timeout=30s;
+    server 10.130.12.76:8080 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 100;
+}
+
+upstream 8-titan {
+   server 10.120.83.1:8080;
+   server 10.120.82.183:8080;
+}
+upstream jr {
+   server 10.120.78.60:8080;
+   server 10.120.78.61:8080;
+}
+upstream backend_thor {
+    server 10.120.78.85:8081;
+    server 10.120.78.86:8081;
+}
+
+upstream backend_probe {
+    server 10.120.220.35:8181;
+    server 10.120.220.36:8181;
+}
+
+upstream backend_anole {
+    server 10.120.78.122:8080;
+    server 10.120.78.123:8080;
+}
+
+upstream backend_atlas {
+    server 10.120.78.95:8080;
+    server 10.120.78.96:8080;
+}
+
+upstream backend_bao {
+    sticky name=BAO   path=/;
+    server 10.120.220.33:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.220.34:8081 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 512;
+}
+
+upstream backend_accapi {
+    server 10.120.78.90:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.78.91:8081 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 512;
+}
+
+upstream nyxweb{
+    server 10.120.78.65:8080 max_fails=3 fail_timeout=30s;
+    server 10.120.78.66:8080 max_fails=3 fail_timeout=30s;
+    keepalive 120;
+}
+
+upstream backend_payments_web{
+    server 10.120.78.68:8080;
+    server 10.120.78.69:8080;
+    server 10.170.200.35:8080 backup;
+    server 10.170.200.53:8080 backup;
+    server 10.170.200.229:8080 backup;
+    keepalive 512;
+    check interval=3000 rise=3 fall=3 timeout=10000 type=http port=8080;
+    check_http_send "HEAD /health/status.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream backend_hotfix {
+    server 10.120.220.43;
+    server 10.120.220.44;
+}
+
+upstream backend_mallyq {
+    server 10.170.201.27:8081 max_fails=3 fail_timeout=30s;
+    server 10.170.201.28:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.220.70:8081 max_fails=3 fail_timeout=30s backup;
+    server 10.120.220.71:8081 max_fails=3 fail_timeout=30s backup;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 512;
+}
+
+upstream backend_mallbj {
+    server 10.120.220.70:8081 max_fails=3 fail_timeout=30s;
+    server 10.120.220.71:8081 max_fails=3 fail_timeout=30s;
+    server 10.170.201.27:8081 max_fails=3 fail_timeout=30s backup;
+    server 10.170.201.28:8081 max_fails=3 fail_timeout=30s backup;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 512;
+}
+
+upstream backend_vidar {
+    server 10.120.220.67:8080;
+    server 10.120.220.68:8080;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 120;
+}
+
+upstream backend_nighthawk {
+    server 10.120.220.74:8080 max_fails=3 fail_timeout=30s;
+    server 10.170.201.30:8080 max_fails=3 fail_timeout=30s backup;
+    keepalive 512;
+}
+
+upstream backend_lq {
+    server 10.120.220.75:8080 max_fails=3 fail_timeout=30s;
+    server 10.120.220.76:8080 max_fails=3 fail_timeout=30s;
+    server 10.120.83.32:8080 max_fails=3 fail_timeout=30s;
+    server 10.120.83.33:8080 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 512;
+}
+
+upstream backend_lq_active {
+    server 10.120.83.39:8080 max_fails=3 fail_timeout=30s;
+    server 10.120.83.40:8080 max_fails=3 fail_timeout=30s;
+    server 10.120.83.41:8080 max_fails=3 fail_timeout=30s;
+    server 10.120.83.182:8080 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 512;
+}
+
+upstream backend_xfjr_gateway {
+    server 10.120.220.104:8080 max_fails=3 fail_timeout=30s;
+    server 10.120.220.105:8080 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 512;
+}
+
+upstream backendlq_xfjr_crawler_http {
+    server 10.120.220.210:8080 max_fails=3 fail_timeout=30s;
+    server 10.120.220.217:8080 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 100;
+}
+
+upstream backend_varnish_hz {
+    server 10.120.83.90:6081;
+    server 10.170.200.44:6081;
+    server 10.170.200.62:6081;
+    keepalive 30;
+}
+
+upstream m-xykepay {
+    server 10.120.220.75:8080;
+    server 10.120.220.76:8080;
+}
+
+upstream backend_acccloud {
+    sticky name=ACCLOUDHZ hmac=sha1 hmac_key=accloudhz;
+    server 10.120.220.113:8181 max_fails=3 fail_timeout=30s;
+    server 10.120.220.114:8181 max_fails=3 fail_timeout=30s;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http port=8181;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 120;
+}
+
+upstream backend_platformapi_hz {
+    server 10.120.78.57:8081;
+    server 10.120.78.58:8081;
+}
+
+upstream bkendlq_promionhz {
+    server 10.120.220.214:8181 max_fails=3 fail_timeout=30s;
+    server 10.120.220.215:8181 max_fails=3 fail_timeout=30s;
+    keepalive 100;
+}
+
+upstream daistaticjr {
+    server 10.120.83.60 max_fails=3 fail_timeout=30s;
+    server 10.120.83.61 max_fails=3 fail_timeout=30s;
+    keepalive 120;
+}
+
+upstream supergate-epayhz {
+    server 10.120.220.107:8080;
+    server 10.120.220.108:8080;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status.htm HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}

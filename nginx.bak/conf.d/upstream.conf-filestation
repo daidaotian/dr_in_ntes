@@ -1,0 +1,9 @@
+upstream fs_preview {
+    server 127.0.0.1:9018;
+    keepalive 16;
+}
+
+upstream fs_download {
+    server 127.0.0.1:8018;
+    keepalive 16;
+}

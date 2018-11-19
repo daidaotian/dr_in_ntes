@@ -1,0 +1,4 @@
+upstream cms {
+    server 61.135.251.152;
+    server 220.181.8.151;
+}

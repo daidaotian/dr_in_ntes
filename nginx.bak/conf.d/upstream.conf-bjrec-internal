@@ -1,0 +1,420 @@
+upstream bjrec-service {
+    server 10.122.152.172:8181;
+    server 10.122.152.173:8181;
+    server 10.122.152.174:8181;
+    server 10.122.152.175:8181;
+    server 10.122.152.176:8181;
+    server 10.122.152.177:8181;
+}
+upstream newsreconline {
+    server 10.200.148.44:8080;
+    server 10.200.148.43:8080;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+    check_http_send "HEAD /alive HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream bjrec-service-news-search {
+    server 10.200.131.25:8302;
+    server 10.200.131.26:8302;
+    server 10.200.128.154:8302;
+}
+upstream logo_detection {
+    server 10.200.130.48:12088;
+    server 10.200.130.48:12089;
+    server 10.200.130.48:12090;
+    server 10.200.130.49:12088;
+    server 10.200.130.49:12089;
+    server 10.200.130.49:12090;
+    server 10.200.130.50:12088;
+    server 10.200.130.50:12089;
+    server 10.200.130.50:12090;
+    server 10.200.130.51:12088;
+    server 10.200.130.51:12089;
+    server 10.200.130.51:12090;
+    server 10.200.130.52:12088;
+    server 10.200.130.52:12089;
+    server 10.200.130.52:12090;
+}
+upstream comment-hz {
+    server 10.122.139.186;
+    server 10.122.139.187;
+    server 10.122.139.188;
+    server 10.122.139.189;
+    server 10.122.139.190;
+    server 10.122.139.191;
+    server 10.122.139.246;
+    server 10.122.139.247;
+    server 10.122.139.248;
+    server 10.122.139.249;
+    server 10.122.139.250;
+    server 10.122.139.251;
+    server 10.122.139.252;
+    server 10.122.139.253;
+    server 10.122.62.12;
+    server 10.122.62.13;
+    server 10.122.62.14;
+    server 10.122.62.15;
+    server 10.122.62.16;
+    server 10.122.62.17;
+    server 10.122.62.18;
+    server 10.122.62.19;
+    server 10.122.62.20;
+    server 10.122.62.21;
+    check interval=5000 rise=2 fall=3 timeout=2500 type=http;
+    check_http_send "HEAD /alive HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream hz2bj-service {
+    server 10.110.200.66;
+    server 172.19.1.10 backup;
+}
+
+upstream bjrecsv-common {
+    server 10.122.188.62:8182;
+    server 10.122.184.34:8182;
+}
+
+upstream bjrecsv-cliflow {
+    server 10.122.188.61:8181;
+    server 10.122.184.38:8181;
+    server 10.122.188.62:8181;
+    server 10.122.184.34:8181;
+}
+
+upstream cont3grecsdk-hz {
+    server 10.200.131.214:8088;
+    server 10.130.47.89:8088;
+    check interval=5000 rise=2 fall=3 timeout=7000 type=http;
+    check_http_send "GET /health/status  HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream newsrec-colunmrec-hz {
+    server 10.200.164.120:8080;
+    server 10.200.164.121:8080;
+    check interval=3000 rise=2 fall=3 timeout=10000 type=http;
+    check_http_send "GET /health/status.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlp-service {
+    server 10.160.247.149:9666;
+    server 10.160.247.150:9666;
+    check interval=3000 rise=2 fall=3 timeout=10000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream nlp-service-news-api {
+    server 10.200.131.152:6816;
+    server 10.200.131.153:6816;
+    server 10.200.131.155:6816;
+    check interval=3000 rise=2 fall=3 timeout=10000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream nlp-service-news-online-api {
+    server 10.160.247.83:6815;
+    server 10.160.247.84:6815;
+    server 10.160.247.149:6815;
+    server 10.160.247.150:6815;
+    server 10.200.130.120:6815;
+    server 10.200.166.203:6815;
+    server 10.200.166.204:6815;
+    server 10.200.166.209:6815;
+    server 10.120.180.234:6815;
+    check interval=3000 rise=2 fall=3 timeout=10000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlp-service-news-graph {
+    server 10.160.247.84:7815;
+    server 10.160.247.86:7815;
+    check interval=3000 rise=2 fall=3 timeout=10000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream nlp-service-lab {
+    server 10.160.247.84:1205;
+    server 10.160.247.86:1205;
+    check interval=3000 rise=2 fall=3 timeout=10000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlp-service-dnlp {
+    server 10.160.247.86:9517;
+    server 10.200.131.155:9517;
+    server 10.200.131.152:9517;
+    check interval=3000 rise=2 fall=3 timeout=10000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlp-cv-dl-api {
+    server 10.200.131.45:10680;
+    server 10.200.131.46:10680;
+    server 10.160.128.189:10680;
+    server 10.200.130.121:10680;
+
+}
+upstream nlp-cv-api-logo {
+    server 10.200.131.45:16815;
+    server 10.200.131.46:16815;
+    server 10.160.128.189:16815;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlp-cv-api-porn {
+    server 10.160.128.189:10077;
+    server 10.200.131.45:10077;
+}
+upstream nlp-cv-api-wm{
+    server 10.200.131.45:10099;
+    server 10.200.131.46:10999;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream nlp-service-cv-api {
+    server 10.200.130.121:10088;
+    server 10.200.131.155:10088;
+    server 10.200.131.45:10088;
+    check interval=3000 rise=2 fall=1 timeout=1000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlp-dnlplat {
+    server 10.200.131.152:12515;
+    server 10.200.131.153:12515;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlp-service-dlnews {
+    server 10.200.130.120:6827;
+    server 10.200.131.45:6827;
+    server 10.200.130.122:6827;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlp-service-dlnlpnews-python {
+    server 10.200.131.45:6837;
+    server 10.200.130.122:6837;
+    server 10.200.130.120:6837;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream relate-video {
+    server 10.200.130.125:8181;
+    server 10.200.130.126:8181;
+    server 10.200.130.127:8181;
+    server 10.120.180.229:8181;
+    server 10.120.180.230:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream bjrec-boluo {
+    server 10.130.47.124:8181;
+    server 10.130.47.125:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /boluo/alive HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlpcsapi-service {
+    server 10.200.130.120:16666;
+    server 10.200.164.125:16666;
+    server 10.200.131.53:16666;
+    check interval=3000 rise=2 fall=3 timeout=10000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlpdpapi-service {
+    server 10.200.129.175:17777;
+    server 10.200.164.118:17777 backup;
+    check interval=3000 rise=2 fall=3 timeout=10000 type=http default_down=false;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlpcvocr-service {
+    server 10.200.131.45:10100;
+    server 10.200.131.46:10100;
+    check interval=3000 rise=2 fall=3 timeout=10000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlpimdfion-service {
+    server 10.200.130.120:19888;
+    server 10.200.130.121:19888;
+    server 10.200.131.45:19888;
+    check interval=3000 rise=2 fall=3 timeout=10000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream dy-statistic {
+    server 10.122.178.159:8181;
+    server 10.122.178.160:8181;
+    server 10.122.178.161:8181;
+    server 10.122.178.162:8181;
+    server 10.122.178.163:8181;
+    server 10.122.178.164:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream zm-api {
+    server 10.200.130.122:13588;
+    server 10.200.131.211:13588;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream relate-article-service {
+    server 10.196.24.167:8181;
+    server 10.196.24.168:8181;
+    server 10.196.24.188:8181;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlpcv-video-service {
+    server 10.120.180.196:10300;
+    server 10.200.130.121:10300;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlp-video2pic {
+    server 10.120.180.196:10200;
+    server 10.200.130.121:10200;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlpcv-video-cv {
+    server 10.200.130.121:12888;
+    server 10.200.130.122:12888;
+    server 10.120.180.196:12888;
+    check interval=5000 rise=2 fall=3 timeout=3000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlpdlapi-service {
+    server 10.200.164.119:10688;
+    server 10.200.131.210:10688;
+    server 10.200.131.211:10688;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream zhimei-nlpdlapi {
+    server 10.200.130.120:6827;
+    server 10.200.131.45:6827;
+    server 10.200.131.53:6827;
+    server 10.200.130.122:6827;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream zhimei-mpapi {
+    server 10.200.130.122:12798;
+    server 10.160.247.83:12798;
+    server 10.160.247.84:12798;
+    server 10.160.247.149:12798;
+    server 10.160.247.150:12798;
+    server 10.120.180.234:12798;
+    server 10.200.166.203:12798;
+    server 10.200.166.204:12798;
+    server 10.200.166.209:12798;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream zhimei-mpclusterapi {
+    server 10.200.131.152:12798;
+    server 10.200.131.153:12798;
+    server 10.200.164.119:12798;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream zhimei-copyright {
+    server 10.200.130.121:10888;
+    server 10.120.180.196:10888;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream zhimei-newsapi {
+    server 10.200.131.152:6816;
+    server 10.200.131.153:6816;
+    server 10.200.131.155:6816;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream zhimei-enumeration {
+    server 10.200.130.120:7515;
+    server 10.200.130.122:7515;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream cangjie-hz-service {
+    server 10.200.131.54:12121;
+    server 10.200.131.56:12121 backup;
+}
+upstream nlp-service-news-ni-online-api {
+    server 10.160.247.83:6915;
+    server 10.160.247.84:6915;
+    server 10.160.247.149:6915;
+    server 10.160.247.150:6915;
+    server 10.200.166.203:6915;
+    server 10.200.166.204:6915;
+    server 10.200.166.209:6915;
+    server 10.120.180.234:6915;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlp-service-news-ni-cluster-api {
+    server 10.200.131.152:6916;
+    server 10.200.131.153:6916;
+    server 10.200.131.155:6916;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream bjrec-hotword-card {
+    server 10.200.131.25:9225;
+    server 10.200.131.26:9225;
+}
+upstream bjrec-dsp-web {
+    server 10.200.131.35:8080;
+    server 10.200.131.36:8080;
+    server 10.200.131.37:8080;
+    server 10.200.131.38:8080;
+    server 10.200.131.39:8080;
+    server 10.200.131.40:8080;
+}
+upstream user-ingress {
+    server 10.194.73.29:8080;
+    keepalive 16;
+}
+upstream zhimei-news-niapi {
+    server 10.160.247.83:6915;
+    server 10.160.247.84:6915;
+    server 10.160.247.149:6915;
+    server 10.160.247.150:6915;
+    server 10.200.166.203:6915;
+    server 10.200.166.204:6915;
+    server 10.200.166.209:6915;
+    server 10.120.180.234:6915;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}

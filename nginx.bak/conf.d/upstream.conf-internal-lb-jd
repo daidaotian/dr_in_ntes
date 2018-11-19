@@ -1,0 +1,726 @@
+# -*- Mode: Nginx -*-
+
+upstream kaolazs-jd-indexdispatcher {
+    server 10.196.29.83:7583 max_fails=3 fail_timeout=120s;
+    server 10.196.28.142:7583 backup;
+    keepalive 64;
+}
+upstream kaolazs-jd-searchdispatcher {
+    server 10.196.29.83:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.29.83:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.29.83:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.29.83:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.142:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.142:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.142:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.142:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.143:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.143:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.143:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.143:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.144:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.144:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.144:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.144:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.145:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.145:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.145:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.145:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.146:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.146:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.146:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.146:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.147:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.147:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.147:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.147:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.148:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.148:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.148:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.148:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.149:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.149:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.149:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.149:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.150:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.150:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.150:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.150:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.30.131:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.30.131:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.30.131:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.30.131:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.30.132:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.30.132:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.30.132:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.30.132:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.30.133:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.30.133:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.30.133:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.30.133:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.30.136:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.30.136:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.30.136:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.30.136:7592 max_fails=3 fail_timeout=120s;
+    keepalive 256;
+}
+
+upstream kaolacs-jd-indexdispatcher {
+    server 10.196.28.151:7583 max_fails=3 fail_timeout=120s;
+    server 10.196.28.152:7583 backup;
+    keepalive 64;
+}
+upstream kaolacs-jd-searchdispatcher {
+    server 10.196.28.151:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.151:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.151:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.151:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.152:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.152:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.152:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.152:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.153:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.153:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.153:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.153:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.154:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.154:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.154:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.154:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.155:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.155:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.155:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.155:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.156:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.156:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.156:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.156:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.157:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.157:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.157:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.157:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.52:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.52:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.52:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.52:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.53:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.53:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.53:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.53:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.72:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.72:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.72:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.72:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.69:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.69:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.69:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.69:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.54:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.54:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.54:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.54:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.67:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.67:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.67:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.67:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.70:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.70:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.70:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.70:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.75:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.75:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.75:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.75:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.74:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.74:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.74:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.74:7592 max_fails=3 fail_timeout=120s;
+    keepalive 256;
+}
+upstream kaolasug-jd-indexdispatcher {
+    server 10.196.28.158:7583 max_fails=3 fail_timeout=120s;
+    server 10.196.28.159:7583 backup;
+    keepalive 64;
+}
+upstream kaolasug-jd-searchdispatcher {
+    server 10.196.28.158:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.158:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.158:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.158:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.159:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.159:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.159:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.159:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.66:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.66:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.66:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.66:7592 max_fails=3 fail_timeout=120s;
+    server 10.196.28.73:7562 max_fails=3 fail_timeout=120s;
+    server 10.196.28.73:7572 max_fails=3 fail_timeout=120s;
+    server 10.196.28.73:7582 max_fails=3 fail_timeout=120s;
+    server 10.196.28.73:7592 max_fails=3 fail_timeout=120s;
+    keepalive 256;
+}
+upstream kaolarec {
+    server 10.194.86.98:8181;
+    server 10.194.82.94:8181;
+    server 10.194.82.95:8181;
+    server 10.194.82.96:8181;
+    server 10.194.82.97:8181;
+    server 10.194.82.98:8181;
+    server 10.194.82.99:8181;
+    server 10.194.82.100:8181;
+    server 10.194.82.101:8181;
+    server 10.194.82.102:8181;
+    server 10.194.82.103:8181;
+    server 10.194.82.104:8181;
+    server 10.194.82.105:8181;
+    server 10.194.82.106:8181;
+    server 10.194.82.107:8181;
+    server 10.194.69.126:8181;
+    server 10.194.69.127:8181;
+    server 10.194.69.128:8181;
+    server 10.194.69.129:8181;
+    server 10.194.69.130:8181;
+    server 10.194.69.131:8181;
+    server 10.194.69.132:8181;
+    server 10.194.69.133:8181;
+    server 10.194.88.88:8181;
+    server 10.194.69.141:8181;
+    server 10.194.69.142:8181;
+    server 10.194.69.143:8181;
+    server 10.194.69.145:8181;
+    server 10.194.69.146:8181;
+    server 10.194.69.152:8181;
+    server 10.194.69.162:8181;
+    server 10.194.69.169:8181;
+    server 10.194.109.38:8181;
+    server 10.194.109.40:8181;
+    server 10.194.109.41:8181;
+    server 10.194.109.42:8181;
+    server 10.194.109.44:8181;
+    server 10.194.109.46:8181;
+    server 10.194.109.47:8181;
+    server 10.194.109.50:8181;
+    server 10.194.109.52:8181;
+    server 10.194.109.54:8181;
+    server 10.194.109.55:8181;
+    server 10.194.109.57:8181;
+    server 10.194.109.58:8181;
+    server 10.194.109.60:8181;
+    server 10.194.109.61:8181;
+    server 10.194.109.62:8181;
+    server 10.194.109.64:8181;
+    server 10.194.109.65:8181;
+    server 10.194.109.66:8181;
+    server 10.194.109.67:8181;
+    server 10.194.109.69:8181;
+    server 10.194.109.70:8181;
+    server 10.194.109.71:8181;
+    server 10.194.109.72:8181;
+    server 10.194.109.73:8181;
+    server 10.194.109.74:8181;
+    server 10.194.109.75:8181;
+    server 10.194.109.76:8181;
+    server 10.194.109.77:8181;
+    server 10.194.109.78:8181;
+    server 10.194.109.79:8181;
+    server 10.194.109.80:8181;
+    server 10.194.111.208:8181;
+    server 10.194.111.209:8181;
+    server 10.194.111.210:8181;
+    server 10.194.111.211:8181;
+    server 10.194.111.212:8181;
+    server 10.194.111.213:8181;
+    server 10.194.111.214:8181;
+    server 10.194.111.215:8181;
+    server 10.194.111.216:8181;
+    server 10.194.111.217:8181;
+    server 10.194.111.218:8181;
+    server 10.194.111.219:8181;
+    server 10.194.111.220:8181;
+    server 10.194.111.222:8181;
+    server 10.194.111.223:8181;
+    server 10.194.111.224:8181;
+    server 10.194.111.225:8181;
+    server 10.194.111.226:8181;
+    server 10.194.111.227:8181;
+    server 10.194.111.229:8181;
+    server 10.194.111.230:8181;
+    server 10.194.111.231:8181;
+    server 10.194.111.232:8181;
+    server 10.194.111.233:8181;
+    server 10.194.111.234:8181;
+    server 10.194.111.235:8181;
+    server 10.194.111.236:8181;
+    server 10.194.111.237:8181;
+    server 10.194.111.238:8181;
+    server 10.194.111.239:8181;
+    server 10.194.139.11:8181;
+    server 10.194.139.13:8181;
+    server 10.194.139.15:8181;
+    server 10.194.139.17:8181;
+    server 10.194.139.19:8181;
+    server 10.194.139.21:8181;
+    server 10.194.139.23:8181;
+    server 10.194.139.2:8181;
+    server 10.194.139.3:8181;
+    server 10.194.139.5:8181;
+    server 10.194.139.7:8181;
+    server 10.194.139.9:8181;
+    server 10.194.147.217:8181;
+    server 10.194.147.218:8181;
+    server 10.194.147.219:8181;
+    server 10.194.147.220:8181;
+    server 10.194.147.221:8181;
+    server 10.194.147.222:8181;
+    server 10.194.147.223:8181;
+    server 10.194.147.224:8181;
+    server 10.194.147.225:8181;
+    server 10.194.147.226:8181;
+    server 10.194.147.227:8181;
+    server 10.194.147.228:8181;
+    server 10.194.147.229:8181;
+    server 10.194.147.230:8181;
+    server 10.194.147.231:8181;
+    server 10.194.147.232:8181;
+    server 10.194.147.233:8181;
+    server 10.194.147.234:8181;
+    server 10.194.147.235:8181;
+    server 10.194.147.236:8181;
+    server 10.194.147.237:8181;
+    server 10.194.147.238:8181;
+    server 10.194.147.239:8181;
+    server 10.194.147.240:8181;
+    server 10.194.147.241:8181;
+    server 10.194.147.242:8181;
+    server 10.194.147.243:8181;
+    server 10.194.147.244:8181;
+    server 10.194.147.245:8181;
+    server 10.194.147.246:8181;
+    server 10.194.147.247:8181;
+    server 10.194.147.248:8181;
+    server 10.194.147.249:8181;
+    server 10.194.147.250:8181;
+    server 10.194.147.251:8181;
+    server 10.194.147.252:8181;
+    server 10.194.147.253:8181;
+    server 10.194.147.254:8181;
+    check interval=3000 rise=2 fall=5 timeout=1900 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 32;
+}
+upstream kaola-soa-onlinejd-service {
+    server 10.194.80.58:9035;
+    server 10.194.131.244:9035;
+    server 10.194.69.225:9035;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nginx-consul {
+    server 10.194.69.22:8500;
+    server 10.194.69.218:8500;
+    server 10.194.80.63:8500;
+}
+upstream kaola-market-web-online {
+    sticky;
+    server 10.194.86.103:8181;
+    server 10.194.94.181:8181;
+    server 10.194.94.183:8181;
+    server 10.194.94.177:8181;
+    server 10.194.94.179:8181;
+    server 10.194.94.175:8181;
+    server 10.194.94.171:8181;
+    server 10.194.94.173:8181;
+    server 10.194.94.167:8181;
+    server 10.194.94.169:8181;
+    server 10.194.94.165:8181;
+    server 10.194.94.157:8181;
+    server 10.194.94.163:8181;
+    server 10.194.94.155:8181;
+    server 10.194.94.161:8181;
+    server 10.194.94.159:8181;
+    server 10.194.94.151:8181;
+    server 10.194.94.153:8181;
+    server 10.194.94.149:8181;
+    server 10.194.94.147:8181;
+    server 10.194.94.145:8181;
+    server 10.194.65.2:8181;
+    server 10.194.65.1:8181;
+    server 10.194.84.254:8181;
+    server 10.194.84.253:8181;
+    server 10.194.84.252:8181;
+    server 10.194.84.1:8181;
+    server 10.194.84.251:8181;
+    server 10.194.84.249:8181;
+    server 10.194.84.250:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream kaola-tradecenter-wap {
+    server 10.194.110.231:8181;
+    server 10.194.110.232:8181;
+    server 10.194.110.233:8181;
+    server 10.194.110.234:8181;
+    server 10.194.110.235:8181;
+    server 10.194.110.236:8181;
+    server 10.194.110.237:8181;
+    server 10.194.70.79:8181;
+    server 10.194.70.80:8181;
+    server 10.194.70.8:8181;
+    server 10.194.142.183:8181;
+    server 10.194.142.184:8181;
+    server 10.194.142.185:8181;
+    server 10.194.142.186:8181;
+    server 10.194.142.187:8181;
+    server 10.194.142.188:8181;
+    server 10.194.142.189:8181;
+    server 10.194.142.190:8181;
+    server 10.194.142.191:8181;
+    server 10.194.142.192:8181;
+    server 10.194.142.193:8181;
+    server 10.194.142.194:8181;
+    server 10.194.142.195:8181;
+    server 10.194.142.196:8181;
+    server 10.194.142.197:8181;
+    server 10.194.142.198:8181;
+    server 10.194.142.199:8181;
+    server 10.194.142.201:8181;
+    server 10.194.142.203:8181;
+    server 10.194.142.204:8181;
+    server 10.194.142.205:8181;
+    server 10.194.142.206:8181;
+    server 10.194.142.207:8181;
+    server 10.194.142.208:8181;
+    server 10.194.142.209:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream kaola-tradecenter-web {
+    server 10.194.110.239:8181;
+    server 10.194.110.242:8181;
+    server 10.194.110.245:8181;
+    server 10.194.110.238:8181;
+    server 10.194.110.240:8181;
+    server 10.194.110.241:8181;
+    server 10.194.110.246:8181;
+    server 10.194.110.247:8181;
+    server 10.194.110.243:8181;
+    server 10.194.142.210:8181;
+    server 10.194.142.211:8181;
+    server 10.194.142.212:8181;
+    server 10.194.142.213:8181;
+    server 10.194.142.214:8181;
+    server 10.194.142.215:8181;
+    server 10.194.142.216:8181;
+    server 10.194.142.217:8181;
+    server 10.194.142.218:8181;
+    server 10.194.142.219:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream kaola-element-web-online {
+    server 10.194.147.9:8181;
+    server 10.194.147.12:8181;
+    server 10.194.147.8:8181;
+    server 10.194.147.17:8181;
+    server 10.194.147.7:8181;
+    server 10.194.147.21:8181;
+    server 10.194.147.11:8181;
+    server 10.194.147.14:8181;
+    server 10.194.147.18:8181;
+    server 10.194.147.10:8181;
+    server 10.194.147.16:8181;
+    server 10.194.147.23:8181;
+    server 10.194.147.19:8181;
+    server 10.194.147.25:8181;
+    server 10.194.147.13:8181;
+    server 10.194.147.20:8181;
+    server 10.194.147.27:8181;
+    server 10.194.147.22:8181;
+    server 10.194.147.24:8181;
+    server 10.194.147.15:8181;
+    server 10.194.147.30:8181;
+    server 10.194.147.31:8181;
+    server 10.194.147.28:8181;
+    server 10.194.147.26:8181;
+    server 10.194.147.29:8181;
+    server 10.194.147.32:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream kaola-search-wap-online {
+    server 10.194.142.100:8181;
+    server 10.194.142.101:8181;
+    server 10.194.142.90:8181;
+    server 10.194.142.91:8181;
+    server 10.194.142.92:8181;
+    server 10.194.142.93:8181;
+    server 10.194.142.94:8181;
+    server 10.194.142.95:8181;
+    server 10.194.142.96:8181;
+    server 10.194.142.97:8181;
+    server 10.194.142.98:8181;
+    server 10.194.142.99:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream finance-settlement-system-online {
+    server 10.194.105.14:8221;
+    server 10.194.105.15:8221;
+    server 10.194.105.16:8221;
+    server 10.194.105.17:8221;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream common-trace-system-onlinejd {
+    server 10.194.86.47:8082;
+    server 10.194.103.206:8082;
+    server 10.194.103.210:8082;
+    server 10.194.103.208:8082;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream common-fix-platform-console-onlinejd {
+    server 10.194.96.5:8181;
+    server 10.194.96.6:8181;
+    server 10.194.96.10:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream kaola-supplier-fed-onlinejd {
+    server 10.194.107.230:3000;
+    server 10.194.107.231:3000;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream evaluation-system-online {
+    server 10.194.86.60:6049;
+    server 10.194.103.132:6049;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream bi-abtest-system-web-onlinejd {
+    server 10.194.101.238:9999;
+    server 10.194.86.150:9999;
+}
+upstream common-disconf-system-testjd {
+    ip_hash;
+    server 10.194.116.26:9000;
+    server 10.194.116.27:9000;
+    server 10.194.116.28:9000;
+    server 10.194.116.29:9000;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream common-disconf-system-onlinejd {
+    ip_hash;
+    server 10.194.103.138:8181;
+    server 10.194.103.139:8181;
+    server 10.194.103.140:8181;
+    server 10.194.103.141:8181;
+    server 10.194.103.142:8181;
+    server 10.194.103.143:8181;
+    server 10.194.103.144:8181;
+    server 10.194.103.145:8181;
+    server 10.194.103.146:8181;
+    server 10.194.103.147:8181;
+    server 10.194.103.148:8181;
+    server 10.194.103.149:8181;
+    server 10.194.103.150:8181;
+    server 10.194.103.151:8181;
+    server 10.194.103.152:8181;
+    server 10.194.103.153:8181;
+    server 10.194.103.154:8181;
+    server 10.194.103.155:8181;
+    server 10.194.103.156:8181;
+    server 10.194.103.157:8181;
+    server 10.194.103.158:8181;
+    server 10.194.103.159:8181;
+    server 10.194.103.160:8181;
+    server 10.194.103.161:8181;
+    server 10.194.103.162:8181;
+    server 10.194.103.163:8181;
+    server 10.194.103.164:8181;
+    server 10.194.103.165:8181;
+    server 10.194.103.166:8181;
+    server 10.194.103.167:8181;
+    server 10.194.103.168:8181;
+    server 10.194.103.169:8181;
+    server 10.194.103.170:8181;
+    server 10.194.103.171:8181;
+    server 10.194.103.172:8181;
+    server 10.194.103.173:8181;
+    server 10.194.103.174:8181;
+    server 10.194.103.175:8181;
+    server 10.194.103.176:8181;
+    server 10.194.103.177:8181;
+    server 10.194.103.178:8181;
+    server 10.194.103.179:8181;
+    server 10.194.103.180:8181;
+    server 10.194.103.181:8181;
+    server 10.194.103.182:8181;
+    server 10.194.103.183:8181;
+    server 10.194.103.184:8181;
+    server 10.194.103.185:8181;
+    server 10.194.103.186:8181;
+    server 10.194.103.187:8181;
+    server 10.194.66.171:8181;
+    server 10.194.86.197:8181;
+    server 10.194.86.88:8181;
+    server 10.194.86.89:8181;
+    server 10.194.86.90:8181;
+    server 10.194.86.92:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream schedule-bi-service {
+    server 10.194.80.66:8181;
+    server 10.194.82.54:8181;
+    server 10.194.82.53:8181;
+}
+upstream common-ucc-system-online {
+    server 10.201.85.200:8181;
+    server 10.201.85.201:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream common-ucc-system-onlinejd {
+    server 10.194.68.62:8181;
+    server 10.194.68.63:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream common-ucc-new-system-onlinejd {
+    server 10.194.71.193:8181;
+    server 10.194.71.195:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream encrypt-system-onlinejd {
+    sticky;
+    server 10.194.86.252:8181;
+    server 10.194.88.25:8181;
+    server 10.194.88.26:8181;
+    server 10.194.88.27:8181;
+    server 10.194.88.28:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream sc-ticket-api-onlinejd {
+    server 10.194.66.198:8010;
+    server 10.194.66.199:8010;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream kaola-soa-testjd {
+    sticky;
+    server 10.194.116.64:8291;
+    server 10.194.116.65:8291;
+}
+upstream finance-expense-system-onlinejd {
+    server 10.194.90.240:8221;
+    server 10.194.90.241:8221;
+    server 10.194.90.242:8221;
+    server 10.194.90.243:8221;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream logistics-tms-system-onlinejd {
+    server 10.194.90.223:8181;
+    server 10.194.90.224:8181;
+    server 10.194.90.225:8181;
+    server 10.194.90.226:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream kaola-dpp-fed-online {
+    server 10.194.70.233:8181;
+    server 10.194.70.234:8181;
+    server 10.194.70.235:8181;
+    server 10.194.70.236:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream kaola-dpp-online {
+    server 10.194.70.233:8183;
+    server 10.194.70.234:8183;
+    server 10.194.70.235:8183;
+    server 10.194.70.236:8183;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream kaola-carry-onlinejd {
+    server 10.194.93.127:8181;
+    server 10.194.93.128:8181;
+    server 10.194.68.224:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream common-projmanage-system-onlinejd {
+    server 10.194.80.117:8080;
+    server 10.194.97.240:8080;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream kaola-search-web-onlinejd {
+    server 10.194.110.7:8181;
+    server 10.194.110.8:8181;
+    server 10.194.110.10:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream ofc-divisionconfig-system-onlinejd {
+    server 10.194.133.173:8181;
+    server 10.194.133.175:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream klqa-platform-compose-onlinejd {
+    server 10.194.90.139:8182;
+    server 10.194.90.140:8182;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream kaola-search-web-betajd {
+    server 10.194.134.15:8181;
+    server 10.194.134.16:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream kaola-search-wap-betajd {
+    server 10.194.134.17:8181;
+    server 10.194.134.18:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}

@@ -1,0 +1,77 @@
+upstream space {
+    server 10.172.57.41:8181;
+    server 10.172.57.14:8181;
+    server 10.172.57.16:8181;
+    server 10.172.57.15:8181;
+    server 10.172.57.17:8181;
+    server 10.172.57.19:8181;
+    server 10.172.57.18:8181;
+    server 10.172.57.21:8181;
+    server 10.172.57.23:8181;
+    server 10.172.57.24:8181;
+    server 10.172.57.22:8181;
+    server 10.172.57.27:8181;
+    server 10.172.57.26:8181;
+    server 10.172.57.28:8181;
+    server 10.172.57.12:8181;
+    server 10.172.57.29:8181;
+    server 10.172.57.30:8181;
+    server 10.172.57.31:8181;
+    server 10.164.135.211:8181;
+    server 10.164.135.210:8181;
+    server 10.164.135.209:8181;
+    server 10.122.161.11:8181;
+    server 10.122.161.12:8181;
+    server 10.122.161.13:8181;
+    keepalive 20;
+}
+
+upstream suggest {
+    server 10.120.145.101:8181;
+    server 10.120.145.103:8181;
+    server 10.120.145.104:8181;
+    server 10.120.145.105:8181;
+    server 10.120.145.246:8181;
+    keepalive 20;
+}
+
+upstream theme {
+    server 10.172.57.55:8181;
+    server 10.172.57.57:8181;
+    keepalive 20;
+}
+
+upstream os {
+    server 10.172.57.32:8181;
+    server 10.172.57.33:8181;
+    server 10.172.57.35:8181;
+    server 10.172.57.34:8181;
+    server 10.172.57.37:8181;
+    keepalive 20;
+}
+
+upstream blogtrack {
+    server 10.172.57.36:8182;
+    server 10.172.57.38:8182;
+    server 10.172.57.20:8182;
+    server 10.172.57.25:8182;
+    keepalive 20;
+}
+
+upstream blogpay {
+    server 10.172.57.80:8181;
+    server 10.172.57.84:8181;
+    keepalive 20;
+}
+
+upstream circle {
+    server 10.172.57.43:8181;
+    server 10.172.57.47:8181;
+    keepalive 20;
+}
+
+upstream blogmessage {
+    server 10.172.57.94:8181;
+    server 10.172.57.97:8181;
+    keepalive 20;
+}

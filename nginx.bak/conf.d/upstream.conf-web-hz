@@ -1,0 +1,1262 @@
+upstream ehr {
+    sticky;
+    server 10.172.96.249:8181;
+    server 10.172.96.250:8181;
+    keepalive 100;
+}
+upstream ucmult {
+    server 10.122.149.24:6666;
+    server 10.122.149.23:6666;
+}
+
+upstream ndir {
+    server 172.17.3.216:10000;
+    server 172.17.2.54:10000;
+}
+
+upstream test-ndp {
+    server 10.165.139.164:8989;
+    server 10.165.139.178:8989;
+}
+upstream  device-debug {
+    server 10.165.185.137:7100;
+    server 10.165.185.152:7100;
+}
+upstream wr.da.netease.com {
+    server 10.172.136.201:8088;
+    server 10.172.136.200:8088;
+    server 10.172.136.202:8088;
+    server 10.172.136.230:8088;
+    server 10.172.136.229:8088;
+    server 10.172.136.231:8088;
+}
+
+upstream qa-wr-da {
+    server 10.120.146.22:8088;
+    server 10.120.146.23:8088;
+}
+
+upstream yuedu-service {
+    server 10.122.133.11:8181;
+    server 10.122.133.12:8181;
+    keepalive 100;
+}
+
+upstream oj {
+    server 10.120.151.87:8000;
+    server 10.120.151.88:8000;
+}
+
+upstream kpida {
+    sticky name=KPIDA hmac=sha1 hmac_key=pki;
+    server 10.120.150.14:8181;
+    server 10.120.145.187:8182;
+}
+upstream omad {
+    sticky name=OMAD hmac=sha1 hmac_key=pki;
+    server 10.120.145.125:8185;
+    server 10.160.128.154:8185;
+    server 10.160.128.155:8185;
+}
+upstream kaolarec {
+    server 10.160.128.95:8180;
+    server 10.160.128.96:8180;
+    server 10.160.128.97:8180;
+}
+upstream qahz {
+    server 10.164.160.117:3000;
+    server 10.164.160.117:3001;
+    server 10.164.160.117:3002;
+    server 10.164.160.117:3003;
+    server 10.164.160.117:3004;
+    server 10.164.160.117:3005;
+    server 10.164.160.117:3006;
+    server 10.164.160.117:3007;
+}
+upstream apistone {
+    server 10.122.148.138:8181;
+    server 10.122.148.170:8181;
+    server 10.201.177.188:8181;
+}
+upstream stone {
+    server 10.122.148.172:8181;
+    server 10.122.148.175:8181;
+    server 10.122.148.180:8181;
+}
+upstream stone-gwapi {
+    server 10.122.148.177:8181;
+    server 10.122.148.174:8181;
+    server 10.122.148.176:8181;
+}
+upstream stone-salonapi {
+    server 10.122.148.177:8182;
+    server 10.122.148.174:8182;
+    server 10.122.148.176:8182;
+}
+upstream tc-dev {
+    server 10.165.136.112:3002;
+    server 10.165.136.112:3003;
+    server 10.164.160.113:3004;
+}
+upstream tchz {
+    server 10.172.153.18:3017;
+    server 10.172.153.30:3017;
+}
+upstream opweb {
+    server 10.122.148.226:8000;
+    server 10.122.148.227:8000;
+}
+
+upstream opapi {
+    server 10.122.148.226:5000;
+    server 10.122.148.227:5000;
+}
+
+upstream cmapi {
+    server 10.122.148.226:5001;
+    server 10.122.148.227:5001;
+}
+upstream nssweb {
+#    server 10.164.140.76:8181;
+    sticky name=NSS hmac=sha1 hmac_key=nss;
+    server 10.164.140.77:8181;
+    server 10.122.148.142:8181;
+    server 10.122.148.143:8181;
+    server 10.201.177.28:8181;
+    server 10.201.177.33:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream prnssweb {
+    server 10.172.128.82:8181 weight=2;
+    server 10.172.128.83:8181 weight=2;
+    server 10.172.128.84:8181 weight=2;
+    server 10.172.128.85:8181 weight=2;
+    server 10.172.82.60:8181 weight=3;
+    server 10.172.82.57:8181 weight=3;
+    server 10.172.82.56:8181 weight=3;
+    server 10.172.128.106:8181 weight=1;
+    server 10.172.128.103:8181 weight=1;
+    server 10.172.128.101:8181 weight=1;
+    server 10.172.128.99:8181 weight=1;
+    server 10.172.128.98:8181 weight=1;
+    server 10.172.128.97:8181 weight=1;
+    server 10.172.128.95:8181 weight=1;
+    server 10.172.128.96:8181 weight=1;
+}
+
+upstream dp-hz {
+    server 10.122.134.20:3000;
+    server 10.122.134.19:3000;
+    server 10.164.132.130:3000;
+}
+upstream dp-hz-api {
+    server 10.122.134.20:7000;
+    server 10.122.134.19:7000;
+    server 10.164.132.130:7000;
+}
+
+upstream docker-hub-hz {
+    #server 10.122.134.24;
+    server 10.170.164.88;
+}
+
+upstream test-docker-hub-hz {
+    server 115.236.124.220;
+}
+
+upstream fulllink {
+    server 10.122.134.22;
+    server 10.122.134.23;
+    server 10.172.128.135;
+    server 10.201.105.11;
+    check interval=2000 rise=2 fall=2 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream fulllink-online-api {
+    server 10.122.134.22:5000;
+    server 10.122.134.23:5000;
+    server 10.172.128.135:5000;
+    #server 10.201.105.11:5000;
+    server 10.172.128.136:5000;
+    #server 10.201.105.12:5000;
+    check interval=2000 rise=2 fall=2 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream fulllink-new {
+    server 10.172.128.136;
+    server 10.201.105.12;
+    check interval=2000 rise=2 fall=2 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream fulllink-test {
+    server 10.164.132.188;
+}
+
+upstream study-perf-qa {
+    server 10.122.163.111:80;
+    keepalive 32;
+}
+upstream kschedule {
+    server 10.194.69.221:8181;
+    server 10.194.69.223:8181;
+}
+upstream bjrec-ws {
+    server 10.164.169.161:8181;
+    server 10.164.169.162:8181;
+    server 10.164.169.163:8181;
+    server 10.164.169.164:8181;
+}
+upstream bjrec-ws-client {
+    server 10.164.169.165:8181;
+    server 10.164.169.166:8181;
+    server 10.164.169.167:8181;
+}
+upstream bjrec-video-quality {
+    server 10.200.128.147:10088;
+    server 10.200.128.147:10089;
+}
+upstream bjrec-video-danger {
+    server 172.19.1.54:13088;
+    server 172.19.1.48:13088;
+}
+upstream kqueue {
+    server 10.194.81.126:8181;
+    server 10.194.81.128:8181;
+}
+upstream hz-wf {
+    server 10.122.148.181:8181;
+    server 10.122.148.182:8181;
+}
+
+upstream hz-wf-static {
+    server 10.122.148.181;
+    server 10.122.148.182;
+}
+
+upstream appops-web {
+    server 10.172.128.156:8080;
+}
+upstream appops-api {
+    server 10.172.128.156:7070;
+}
+upstream salon {
+    sticky name=salon_route hmac=sha1 hmac_key=nsalon;
+    server 10.122.144.83:80;
+    server 10.122.144.84:80;
+}
+
+upstream appops-test-web {
+    server 10.165.137.18:8080;
+}
+
+upstream appops-test-api {
+    server 10.165.137.18:7070;
+}
+upstream hz-wf-api {
+    server 10.172.128.67:8181;
+    server 10.172.128.66:8181;
+}
+
+upstream hz-wf-person {
+    server 10.122.148.181:8181;
+    server 10.122.148.182:8181;
+}
+
+upstream hz-wf-app {
+    server 10.172.128.70:8181;
+    server 10.172.128.71:8181;
+}
+
+upstream ee-ext {
+    server 10.165.185.137:3000;
+    server 10.165.185.152:3000;
+}
+
+upstream ee-int {
+    server 10.165.185.137:3001;
+    server 10.165.185.152:3001;
+}
+
+upstream webantispam {
+  sticky name=YIDUNWEB hmac=sha1 hmac_key=yidunweb;
+  server 10.200.167.135:8001;
+  server 10.200.167.136:8001;
+  check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+  check_http_send "GET /status.html HTTP/1.0\r\n\r\n";
+  check_http_expect_alive http_2xx http_3xx;
+}
+
+
+upstream nkvconsole {
+  server 10.122.170.141:8182;
+  server 10.122.170.142:8182;
+}
+upstream ee-ext-device_control {
+    server 10.165.185.137:7110;
+    server 10.165.185.152:7110;
+}
+
+upstream  kaola-soa-dashboard {
+    server 10.122.137.200:8181;
+}
+upstream client-search-flow {
+    server 10.122.188.61:8181;
+    server 10.122.184.38:8181;
+    server 10.122.188.62:8181;
+    server 10.122.184.34:8181;
+}
+upstream qa-crash-netease {
+    server 10.165.148.78:8181;
+    server 10.165.148.90:8181;
+}
+
+upstream looker {
+    server 10.172.41.231:8181;
+    server 10.172.41.232:8181;
+}
+
+upstream httpdns {
+    sticky name=HTTPDNS hmac=sha1 hmac_key=httpdnshz;
+    server 10.172.82.23:8080;
+    server 10.172.82.24:8080;
+    server 10.172.82.22:8080;
+}
+
+upstream dtddownload {
+    server 127.0.0.1:8081;
+    server 183.232.50.100:8082;
+}
+
+upstream pdnsapi {
+    server 10.172.128.139:8081;
+    server 10.164.132.170:8081;
+}
+
+upstream cloudrepo {
+    sticky;
+    server 10.172.128.146:8080;
+    server 10.172.128.147:8080;
+    keepalive 100;
+}
+
+upstream check-keyword {
+    server 10.170.164.29:8926;
+    server 10.170.164.30:8926;
+}
+
+upstream pixiu-datacenter {
+    server 10.172.42.120:8080;
+    server 10.172.42.121:8080;
+    server 10.172.42.122:8080;
+    server 10.172.42.123:8080;
+    server 10.172.42.124:8080;
+    server 10.172.42.125:8080;
+}
+upstream api-mbo {
+    server 10.172.96.201:8181;
+    server 10.172.96.199:8181;
+}
+upstream mbo {
+    server 10.172.96.198:8181;
+    server 10.172.96.200:8181;
+}
+upstream hubble {
+    server 10.172.136.232:8000;
+    server 10.172.136.233:8000;
+}
+upstream hubble-analytics {
+    sticky;
+    server 10.172.136.232:8182;
+    server 10.172.136.233:8182;
+}
+upstream  haitao-datax {
+    server 10.172.27.210:8181;
+    server 10.172.27.211:8181;
+}
+
+upstream bjrec-flow-common {
+    server 10.122.188.62:8182;
+    server 10.122.184.34:8182;
+}
+upstream bjrec-flow-toutiao {
+    server 10.122.152.172:8181;
+    server 10.122.152.173:8181;
+    server 10.122.152.174:8181;
+    server 10.122.152.175:8181;
+    server 10.122.152.176:8181;
+    server 10.122.152.177:8181;
+}
+upstream stone-admin {
+    server 10.122.148.148:8181;
+    server 10.122.148.149:8181;
+}
+
+upstream hr-ehr {
+    server 10.201.225.23:8181;
+    server 10.201.225.25:8181;
+}
+
+upstream legal-netease {
+    server 10.122.144.94:8080;
+}
+upstream manhua-hz {
+    sticky name=MHHZPRIS hmac=sha1 hmac_key=mhhzpris;
+    server 10.122.133.133:8181;
+    server 10.122.133.134:8181;
+}
+upstream admin-nsmobile {
+    sticky name=NSCENTER hmac=sha1 hmac_key=nscenter;
+    server 10.172.105.75:9191;
+    server 10.172.105.76:9191;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream admin-nsmobile-web {
+    sticky name=NSCENTERWEB hmac=sha1 hmac_key=nscenterweb;
+    server 10.172.105.75:9190;
+    server 10.172.105.76:9190;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /web/index.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream center-nsmobile {
+    sticky name=NSADMIN hmac=sha1 hmac_key=nsadmin;
+    server 10.122.150.97:9193;
+    server 10.122.150.96:9193;
+    server 10.172.105.80:9193;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream bjrec-client-headline {
+    server 10.172.42.42:8181;
+    server 10.172.42.44:8181;
+}
+upstream udc-api-ufquery {
+    server 10.200.129.148:16666;
+    server 10.200.129.149:16666;
+    server 10.200.129.150:16666;
+    server 10.200.129.77:16666;
+    server 10.200.129.78:16666;
+    server 10.200.129.79:16666;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream udc-api-idquery {
+    server 10.200.129.148:16666;
+    server 10.200.129.149:16666;
+    server 10.200.129.150:16666;
+    server 10.200.129.77:16666;
+    server 10.200.129.78:16666;
+    server 10.200.129.79:16666;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream yaolu-hz {
+    server 10.172.113.63:8181;
+    server 10.172.113.62:8181;
+}
+upstream du-hz {
+    server 10.122.133.60:8181;
+    server 10.122.133.58:8181;
+}
+upstream pre-hubble {
+    sticky;
+    server 10.172.136.232:8000;
+    server 10.172.136.233:8000;
+}
+upstream hubble-dev {
+    server 10.172.136.248:8181;
+    server 10.164.140.220:8181;
+}
+upstream mmtest {
+    server 10.172.72.62:7474;
+    server 10.172.72.61:7474;
+}
+
+upstream test-phoenix {
+    server 10.172.128.156:8181;
+}
+upstream okrstatic {
+    ip_hash;
+    server 10.201.225.2:8188;
+    server 10.201.225.3:8188;
+}
+upstream ehrokr {
+    server 10.201.225.2:8080;
+    server 10.201.225.3:8080;
+}
+upstream kaola-bizdata {
+    server 10.194.97.58:8181;
+    server 10.194.107.5:8181;
+}
+upstream vcloud-statics {
+    server 10.172.129.48:8888;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /index.jsp HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream stone-robot {
+    server 10.122.148.148:8182;
+    server 10.122.148.149:8182;
+}
+upstream phoenix-online {
+    server 10.172.128.155:8181;
+}
+upstream ee-int-api {
+    server 10.165.185.137:3005;
+    server 10.165.185.152:3005;
+}
+upstream tiancheng-thirdparty {
+    server 10.172.82.70:8182;
+    server 10.172.82.71:8182;
+}
+
+upstream channel-test {
+    sticky name=CHANNELTEST hmac=sha1 hmac_key=channeltest;
+    server 10.165.148.88:8081;
+    server 10.165.148.89:8081;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream channel-testaplth {
+    sticky name=CHANNELAPLTH hmac=sha1 hmac_key=channelaplth;
+    server 10.165.148.88:8080;
+    server 10.165.148.89:8080;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream api-workflow {
+    server 10.201.177.112:8181;
+    server 10.201.177.113:8181;
+    server 10.201.177.114:8181;
+}
+upstream kf {
+    server 10.201.177.130:8181;
+    server 10.201.177.131:8181;
+}
+
+upstream pre-hubble-analytics {
+    sticky name=PREHUB hmac=sha1 hmac_key=prehub;
+    server 10.172.104.66:8181;
+    server 10.172.104.66:8182;
+}
+upstream ehrtest {
+    sticky;
+    server 10.164.148.206:8181;
+    server 10.172.96.222:8181;
+    keepalive 100;
+}
+
+upstream yuedu-hzntes {
+    server 10.122.133.13:8280;
+    server 10.122.133.14:8280;
+}
+
+upstream dubbok {
+    server 172.17.3.91;
+}
+upstream stone-im {
+    server 10.122.148.172:8182;
+    server 10.122.148.175:8182;
+    server 10.122.148.180:8182;
+}
+upstream api-kf {
+    server 10.172.128.71:8182;
+    server 10.172.128.70:8182;
+}
+upstream kf-thirdparty-api {
+    server 10.172.128.71:8182;
+    server 10.172.128.70:8182;
+}
+upstream npt-dev {
+    server 10.165.185.160:8000;
+    server 10.165.185.159:8000;
+}
+upstream ncconfig-ws {
+    sticky;
+    server 10.122.175.224:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.122.175.223:8181 max_fails=2 fail_timeout=30 weight=1;
+}
+upstream udc-api-batchquery {
+    server 10.200.129.148:16666;
+    server 10.200.129.149:16666;
+    server 10.200.129.150:16666;
+    server 10.200.129.77:16666;
+    server 10.200.129.78:16666;
+    server 10.200.129.79:16666;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream hubble-qa {
+    server 10.122.134.195:8181;
+    server 10.122.134.195:8182;
+}
+
+upstream bjrec-client-video {
+    server 10.201.137.3:8181;
+    server 10.201.137.13:8181;
+    server 10.201.137.17:8181;
+}
+upstream bjrec-netease-news {
+    server 10.200.131.25:8302;
+    server 10.200.131.26:8302;
+    server 10.200.128.154:8302;
+}
+upstream npt-netease {
+    server 10.172.153.36:8000;
+    server 10.172.153.37:8000;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET / HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream channel-admin {
+    sticky name=CHANNELADMIN hmac=sha1 hmac_key=channeladmin;
+    server 10.201.169.22:8081;
+    server 10.201.169.23:8081;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream channel-adminaplth {
+    sticky name=CHANNELADAPLTH hmac=sha1 hmac_key=channeladaplth;
+    server 10.201.169.22:8080;
+    server 10.201.169.23:8080;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream vcloud-elk {
+    sticky;
+    server 10.201.105.3:5601;
+    server 10.201.105.10:5601;
+}
+
+upstream nnshotw-bjrecm {
+    server 10.200.128.154:8301;
+    server 10.200.131.25:8301;
+    server 10.200.131.26:8301;
+}
+
+upstream adindex {
+    server 10.122.184.85:8080;
+}
+upstream stone-admin-test {
+    server 10.165.139.186:8181;
+    server 10.165.139.178:8181;
+}
+
+upstream hrstatic-netease {
+    server 10.201.225.13:8188;
+    server 10.201.225.15:8188;
+}
+upstream oldxiaozhaostatic {
+    server 10.172.96.231:80;
+    server 10.172.96.232:80;
+    keepalive 100;
+}
+
+upstream hrservice-netease {
+    server 10.201.225.13:8080;
+    server 10.201.225.15:8080;
+}
+upstream hrs-msg-netease {
+    server 10.201.225.13:8189;
+    server 10.201.225.15:8189;
+}
+upstream ehrbi-netease {
+    server 10.172.96.242:8181;
+    server 10.172.96.243:8181;
+    check interval=2000 rise=2 fall=2 timeout=1000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream abos-pms {
+    server 10.201.184.195:9191;
+    server 10.201.184.194:9191;
+}
+upstream abos-oms {
+    server 10.201.184.198:9000;
+    server 10.201.184.199:9000;
+}
+upstream abos-web {
+    server 10.172.45.214:9000;
+    server 10.172.45.213:9000;
+}
+upstream dahr {
+    server 10.172.96.244:8181;
+    server 10.172.96.245:8181;
+    check interval=2000 rise=2 fall=2 timeout=1000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream cloud_online_apigateway_server {
+    server 10.172.96.235:8002;
+    server 10.172.96.236:8002;
+}
+upstream bjrec-m-logo-detection {
+    server 10.200.130.48:12088;
+    server 10.200.130.48:12089;
+    server 10.200.130.48:12090;
+    server 10.200.130.49:12088;
+    server 10.200.130.49:12089;
+    server 10.200.130.49:12090;
+    server 10.200.130.50:12088;
+    server 10.200.130.50:12089;
+    server 10.200.130.50:12090;
+    server 10.200.130.51:12088;
+    server 10.200.130.51:12089;
+    server 10.200.130.51:12090;
+    server 10.200.130.52:12088;
+    server 10.200.130.52:12089;
+    server 10.200.130.52:12090;
+}
+upstream seasons-store {
+    server  10.172.45.208:8181;
+    server  10.172.45.209:8181;
+}
+
+upstream abosntes-apigw {
+    server 10.201.184.200:9292;
+    server 10.201.184.201:9292;
+}
+
+upstream devhubble-jump {
+    server 10.172.108.29:8181;
+    server 10.122.134.207:8181;
+}
+upstream bjrec-sport-receive {
+    server 10.172.40.96:8181;
+    server 10.172.40.96:8182;
+}
+
+upstream abos-backend {
+    server 10.201.184.202:8431;
+    server 10.172.45.218:8431;
+}
+upstream app-dev-hz {
+    server 10.165.136.85:80;
+    server 10.165.136.109:80;
+}
+upstream bjrec-hotword-full {
+    server 10.200.131.25:8100;
+    server 10.200.131.26:8100;
+}
+upstream bjrec-hotwordlib {
+    server 10.200.131.25:8300;
+    server 10.200.131.26:8300;
+}
+upstream video-quality-2th {
+    server 10.200.130.57:10088;
+    server 10.200.130.57:10089;
+}
+upstream novelhz-ntes {
+    server 10.172.6.35:8181;
+    server 10.172.6.29:8181;
+    check interval=5000 rise=2 fall=5 timeout=3000 type=http;
+    check_http_send "GET /health/status.do HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream config-netease {
+    server 10.172.82.129:8080;
+    server 10.172.82.130:8080;
+    server 10.122.148.208:8080;
+    server 10.122.148.207:8080;
+}
+
+upstream testkf-ntes {
+    server 10.165.139.137:8181;
+    server 10.165.139.185:8181;
+}
+
+upstream dmp-ntes {
+    sticky name=DMP hmac=sha1 hmac_key=dmp;
+    server 10.201.88.81:8881;
+    server 10.201.88.82:8881;
+    server 10.201.88.83:8881;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream devconstst-ntes {
+    server 10.172.104.253:80;
+}
+
+upstream storebackend {
+    sticky name=STOREBACKEND hmac=sha1 hmac_key=storebackend;
+    server 10.172.104.253:8181;
+}
+upstream devconsole-website {
+    server 10.172.104.253:80;
+}
+upstream hubble-data-api {
+    server 10.172.136.215:8084;
+    server 10.172.136.211:8084;
+    server 10.172.136.232:8084;
+    server 10.172.136.233:8084;
+}
+upstream apigateway {
+    server 10.201.169.65:7777;
+    server 10.201.169.66:7777;
+}
+upstream fl-flower {
+    server 10.122.134.22:5005 max_fails=2 fail_timeout=30;
+    server 10.122.134.23:5005 max_fails=2 fail_timeout=30;
+    server 10.172.128.135:5005 max_fails=2 fail_timeout=30;
+    server 10.172.128.136:5005 max_fails=2 fail_timeout=30;
+}
+upstream youliao-h5-server {
+    server 10.201.243.2:8089;
+    server 10.201.243.24:8089;
+}
+upstream hrs-sso-netease {
+    server 10.201.225.2:8800;
+    server 10.201.225.3:8800;
+    server 10.201.225.22:8800;
+}
+upstream hubble_data_tracker_mobile {
+    server 10.122.134.213:8181;
+}
+upstream bdms-dev-http {
+    server 10.165.139.75:8081;
+    server 10.165.139.76:8081;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http default_down=false;
+    check_http_send "GET /v1/health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream kxeditor-ntes {
+    server 10.122.133.150:8181;
+    server 10.122.133.151:8181;
+}
+
+upstream mhr163 {
+    sticky name=MHR163KEY hmac=sha1 hmac_key=mhr163key;
+    server 10.172.96.231:8901;
+    server 10.172.96.232:8901;
+    keepalive 100;
+}
+
+upstream mhr163static {
+    server 10.172.96.231:80;
+    server 10.172.96.232:80;
+    keepalive 100;
+}
+upstream captchaurshz-nis {
+    sticky name=CAPTCHAURSHZ hmac=sha1 hmac_key=captchaurshz;
+    server 10.200.158.18:8181;
+    server 10.200.158.19:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /status.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream test-kf {
+    server 10.165.139.142:8181;
+}
+upstream storebackend-qa-ntes {
+    server 10.201.161.54:8181;
+    server 10.201.161.63:8181;
+}
+upstream cluster-dev-operation-web-qa {
+    ip_hash;
+    server 10.201.161.54:6262;
+    server 10.201.161.63:6262;
+}
+upstream cluster-dev-operation-static-qa {
+    server 10.201.161.54;
+    server 10.201.161.63;
+}
+upstream cluster-dev-console-static-qa {
+    sticky name=DEVCONCONST-NTES hmac=sha1 hmac_key=devconconst-ntes;
+    server 10.201.161.63;
+    server 10.201.161.54;
+}
+upstream cluster-dev-console-qa {
+    sticky name=DEVCONAPI-NTES hmac=sha1 hmac_key=devconapi-ntes;
+    server 10.201.161.63:6161;
+    server 10.201.161.54:6161;
+}
+
+upstream bolmb-ntes {
+    sticky name=BOLMB hmac=sha1 hmac_key=bolmb;
+    server 10.172.96.231:8902;
+    server 10.172.96.232:8902;
+    keepalive 100;
+}
+
+upstream bolmbstatic-ntes {
+    server 10.172.96.231:80;
+    server 10.172.96.232:80;
+    keepalive 100;
+}
+
+upstream ag-apigw {
+    server 10.201.184.200:9292;
+    server 10.201.184.201:9292;
+}
+upstream ddopapi-ntes {
+    ip_hash;
+    server 10.172.104.253:7272;
+}
+upstream ddopconst-ntes {
+    server 10.172.104.253;
+}
+upstream devconapi-ntes {
+    sticky name=DEVCONAPI-NTES hmac=sha1 hmac_key=devconapi-ntes;
+    server 10.172.104.253:7171;
+}
+upstream devconconst-ntes {
+    sticky name=DEVCONCONST-NTES hmac=sha1 hmac_key=devconconst-ntes;
+    server 10.172.104.253;
+}
+upstream dd-test-ntes {
+    server 10.172.104.253;
+}
+upstream storebackend-netease {
+    server 10.172.104.253:8383;
+}
+upstream ops-elk {
+    sticky name=OPS-ELK hmac=sha1 hmac_key=ops-elk;
+    server 10.201.105.33:5601;
+    server 10.201.105.34:5601;
+}
+
+upstream bjrecm-cogodton {
+    server 10.200.131.55:12008;
+    server 10.200.131.55:12009;
+    server 10.200.128.147:12008;
+    server 10.200.128.147:12009;
+    server 10.200.128.148:12008;
+    server 10.200.128.148:12009;
+}
+upstream bjrec-recsdk {
+    server 10.122.152.178:8181;
+    server 10.122.152.179:8181;
+    server 10.122.152.180:8181;
+    server 10.122.152.197:8181;
+    server 10.122.152.198:8181;
+    server 10.122.152.199:8181;
+    server 10.122.152.200:8181;
+    server 10.122.152.254:8181;
+}
+upstream bjrec-recommend {
+    server 10.122.188.59:8181;
+    server 10.122.188.60:8181;
+}
+upstream xijing-nts {
+    server 10.172.104.133:80;
+    server 10.172.104.134:80;
+}
+upstream yb-test {
+    server 10.201.169.146:9191;
+    server 10.201.169.147:9191;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream lognos_backend {
+    server 10.200.137.1:5602;
+    server 10.200.137.2:5602;
+    server 10.200.137.3:5602;
+}
+upstream workflow-netease {
+    server 10.122.148.181:8182;
+    server 10.201.177.112:8182;
+    server 10.201.177.167:8182;
+}
+upstream bjrec-boluo {
+    server 10.130.47.124:8181;
+    server 10.130.47.125:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /boluo/alive HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream mscfghz-ntes {
+    server 10.201.115.97:8181;
+    server 10.172.64.232:8181;
+    server 10.172.64.233:8181;
+    server 10.201.115.96:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream bdms-dev-websocket {
+    ip_hash;
+    server 10.165.139.75:8081;
+    server 10.165.139.76:8081;
+}
+upstream api-dramatic {
+    server 10.172.104.163:8181;
+    server 10.172.60.32:8181;
+    server 10.172.104.156:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /api/health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream bjrec-docscore {
+    server 10.200.131.25:8303;
+    server 10.200.131.26:8303;
+    server 10.200.128.154:8303;
+}
+upstream operation-dramatic {
+    server 10.172.104.163:3282;
+    server 10.172.60.32:3282;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /api/health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream dht-hz-netease {
+    sticky name=DHTHZNTES hmac=sha1 hmac_key=dhthzntes;
+    server 10.172.6.56:8181;
+    server 10.172.6.57:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status.do HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream bdms-test-http {
+    server 10.165.152.126:8081;
+    server 10.165.204.138:8081;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http default_down=false;
+    check_http_send "GET /v1/health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream bdms-test-websocket {
+    ip_hash;
+    server 10.165.152.126:8081;
+    server 10.165.204.138:8081;
+}
+upstream udc-api-queryraw {
+    server 10.200.129.148:15555;
+    server 10.200.129.149:15555;
+    server 10.200.129.150:15555;
+    server 10.200.129.77:15555;
+    server 10.200.129.78:15555;
+    server 10.200.129.79:15555;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream xqweb {
+    server 10.172.82.151:8088;
+    server 10.172.82.152:8088;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream ab-test {
+    sticky name=ABTEST hmac=sha1 hmac_key=abtest;
+    server 10.172.136.211:9180;
+    server 10.172.136.215:9180;
+}
+
+upstream apiwf-nofrom {
+    server 10.172.82.158:8181;
+    server 10.172.82.159:8181;
+}
+
+upstream testdat-hzntes {
+    server 10.122.216.92:8585;
+    server 10.122.216.91:8585;
+    server 10.122.216.90:8585;
+}
+
+upstream testdat-dataman {
+    server 10.122.216.92:8786;
+    server 10.122.216.91:8786;
+    server 10.122.216.90:8786;
+}
+
+upstream data-hzntes {
+    server 10.122.216.92:8685;
+    server 10.122.216.91:8685;
+    server 10.122.216.90:8685;
+}
+upstream bjrec-relatedsearch {
+    server 10.200.130.59:9215;
+    server 10.200.131.37:9215;
+    server 10.200.131.38:9215;
+}
+upstream bjrec-video-image-vulgar {
+    server 10.196.24.208:12899 weight=8;
+    server 10.200.128.148:12899 weight=2;
+}
+upstream hubble-interface {
+    server 10.201.80.226:8180;
+    server 10.201.80.226:8280;
+}
+upstream abtest-interface {
+    server 10.201.80.226:9180;
+    server 10.201.80.226:9280;
+}
+upstream welfare {
+    sticky;
+    server 10.172.96.247:8086;
+    server 10.172.96.248:8086;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http;
+    check_http_send "GET /common/health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream api-ehr-cloud {
+    server 10.172.96.235:8002;
+    server 10.172.96.236:8002;
+}
+upstream adcm-nos {
+    server 10.201.208.105:50351;
+    server 10.172.14.34:50351;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream ds-portrait-query {
+    server 10.200.129.148:18881;
+    server 10.200.129.149:18881;
+    server 10.200.129.150:18881;
+    server 10.200.129.77:18881;
+    server 10.200.129.78:18881;
+    server 10.200.129.79:18881;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream youliao-comment-server {
+    server 10.201.243.40:8080;
+    server 10.201.243.41:8080;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http;
+    check_http_send "GET /api/v1/health/check HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream et-device-debug {
+    server 10.122.163.25:7100;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream et-device-control {
+    server 10.122.163.25:7110;
+}
+
+upstream et-device-screen {
+    server 10.122.163.25:7120;
+}
+upstream sa-device-debug {
+    server 10.122.163.9:7100;
+    server 10.172.153.2:7100;
+    server 10.172.153.8:7100;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream sa-device-control {
+    server 10.122.163.9:7110;
+    server 10.172.153.2:7110;
+    server 10.172.153.8:7110;
+}
+
+upstream sa-device-screen {
+    server 10.122.163.9:7120;
+    server 10.172.153.2:7120;
+    server 10.172.153.8:7120;
+}
+upstream elect-mark {
+    server 10.164.169.142:8185;
+    server 10.201.240.251:8185;
+    server 10.201.240.252:8185;
+    server 10.201.240.254:8185;
+}
+upstream test-elect-mark {
+    server 10.164.169.141:8185;
+    server 10.201.240.251:8186;
+    server 10.201.240.252:8186;
+    server 10.201.240.254:8186;
+}
+upstream cloud_test_apigateway_server {
+    server 10.172.96.242:8002;
+    server 10.172.96.243:8002;
+}
+upstream data-api-dataman {
+    server 10.122.216.92:8785;
+    server 10.122.216.91:8785;
+    server 10.122.216.90:8785;
+}
+upstream dl-file-server {
+    server 10.120.235.22:30001;
+    server 172.17.1.44:30001;
+}
+upstream ds-api {
+    server 10.200.165.218:8000;
+    server 10.200.165.219:8000;
+    server 10.200.165.220:8000;
+    server 10.200.165.221:8000;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream knox-lt {
+    sticky name=KNOXLT hmac=sha1 hmac_key=knoxlt;
+    server 10.120.232.26:8443;
+    server 10.120.232.27:8443;
+}
+
+upstream knox-jd {
+    sticky name=KNOXJD hmac=sha1 hmac_key=knoxjd;
+    server 10.196.67.43:8443;
+    server 10.196.67.44:8443;
+}
+upstream ehrbi-static-test {
+    server 10.172.78.2:8080;
+    server 10.172.78.5:8080;
+}
+upstream emarketing-app {
+    server 10.122.156.29:8080;
+    server 10.122.156.28:8080;
+}
+
+upstream ehrbi-static-online {
+    server 10.172.78.6:8080;
+    server 10.172.78.7:8080;
+}
+upstream data-api-datasource {
+    server 10.122.216.90:5020;
+    server 10.122.216.91:5020;
+    server 10.122.216.92:5020;
+}
+upstream testdat-datasource {
+    server 10.122.216.90:5010;
+    server 10.122.216.91:5010;
+    server 10.122.216.92:5010;
+}
+upstream youliao-h5-server-v3 {
+    server 10.201.243.20:8089;
+    server 10.201.243.21:8089;
+}
+
+upstream flink-service {
+    server 10.172.128.135:8000;
+    server 10.172.128.136:8000;
+    check interval=2000 rise=2 fall=2 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}

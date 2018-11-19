@@ -1,0 +1,36 @@
+set $ndp_cors_origin '';
+set $ndp_cors_methods '';
+set $ndp_cors_headers '';
+set $ndp_cors_expose_headers '';
+set $ndp_cors_credentials '';
+
+if ($http_origin ~* ^https?://.*\.netease\.com(:[0-9]+)?$) {
+  set $ndp_cors_origin '$http_origin';
+}
+if ($uri = '/api/privilege/obtainToken') {
+  set $ndp_cors_origin '$http_origin';
+}
+
+if ($ndp_cors_origin) {
+  set $ndp_cors_methods 'GET, POST, OPTIONS';
+  set $ndp_cors_headers 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+  set $ndp_cors_expose_headers 'Content-Length,Content-Range';
+  set $ndp_cors_credentials 'true';
+}
+
+if ($request_method = 'OPTIONS') {
+  add_header 'Access-Control-Allow-Origin' '$ndp_cors_origin';
+  add_header 'Access-Control-Allow-Methods' '$ndp_cors_methods';
+  add_header 'Access-Control-Allow-Headers' '$ndp_cors_headers';
+  add_header 'Access-Control-Expose-Headers' '$ndp_cors_expose_headers';
+  add_header 'Access-Control-Allow-Credentials' '$ndp_cors_credentials';
+  add_header 'Access-Control-Max-Age' 1728000;
+  add_header 'Content-Length' 0;
+  return 204;
+}
+
+add_header 'Access-Control-Allow-Origin' '$ndp_cors_origin';
+add_header 'Access-Control-Allow-Methods' '$ndp_cors_methods';
+add_header 'Access-Control-Allow-Headers' '$ndp_cors_headers';
+add_header 'Access-Control-Expose-Headers' '$ndp_cors_expose_headers';
+add_header 'Access-Control-Allow-Credentials' '$ndp_cors_credentials';

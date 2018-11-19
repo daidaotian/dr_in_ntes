@@ -1,0 +1,322 @@
+upstream ocrapi {
+    server 172.17.11.31:9080;
+    server 172.17.11.31:9081;
+    server 172.17.11.31:9082;
+    server 172.17.11.31:9083;
+    server 172.17.11.31:9084;
+    server 172.17.11.31:9085;
+    server 172.17.11.31:9086;
+    server 172.17.11.31:9087;
+    server 172.17.11.31:9088;
+    server 172.17.11.31:9089;
+    server 172.17.11.31:9090;
+    server 172.17.11.31:9091;
+    server 172.17.11.31:9092;
+    server 172.17.11.31:9093;
+    server 172.17.11.31:9094;
+    server 172.17.11.31:9095;
+    server 10.160.128.122:9080;
+    server 10.160.128.122:9081;
+    server 10.160.128.122:9082;
+    server 10.160.128.122:9083;
+    server 10.160.128.122:9084;
+    server 10.160.128.122:9085;
+    server 10.160.128.122:9086;
+    server 10.160.128.122:9087;
+    server 10.160.128.122:9088;
+    server 10.160.128.122:9089;
+    server 10.160.128.122:9090;
+    server 10.160.128.122:9091;
+    server 10.160.128.122:9092;
+    server 10.160.128.122:9093;
+    server 10.160.128.122:9094;
+    server 10.160.128.122:9095;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+upstream assess {
+   server 10.160.129.171:18183;
+   server 10.160.129.172:18183;
+   check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+   check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+   check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream assess_cn {
+   server 172.17.11.41:18183;
+   server 172.17.11.42:18183;
+   check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+   check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+   check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream echo_api{
+   sticky;
+   server 172.17.11.39:9080;
+   server 172.17.11.40:9080;
+   check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+   check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+   check_http_expect_alive http_2xx http_3xx;
+   keepalive 20;
+}
+upstream stream_assess_api {
+   sticky;
+   server 172.17.11.41:18185;
+   server 172.17.11.42:18185;
+   check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+   check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+   check_http_expect_alive http_2xx http_3xx;
+   keepalive 20;
+}
+upstream nmt_api {
+   server 10.200.131.140:9070;
+   server 10.200.131.141:9070;
+   server 10.200.131.142:9070;
+   server 10.200.131.139:9070;
+   check interval=3000 rise=3 fall=3 timeout=10000 type=http;
+   check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+   check_http_expect_alive http_2xx http_3xx;
+   keepalive 20;
+}
+upstream punct_v1_zh {
+   server 10.200.165.90:8090;
+   server 10.200.165.91:8090;
+   check interval=3000 rise=3 fall=3 timeout=10000 type=http;
+   check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+   check_http_expect_alive http_2xx http_3xx;
+   keepalive 20;
+}
+upstream vopapi_callback {
+    server 10.160.129.26:18182;
+    server 10.160.129.27:18182;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+upstream nmt_cn2en {
+   server 10.200.131.138:9070;
+   check interval=3000 rise=3 fall=3 timeout=10000 type=http;
+   check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+   check_http_expect_alive http_2xx http_3xx;
+   keepalive 20;
+}
+
+upstream vopapi_yixin {
+    server 10.170.168.33:18182;
+    server 10.170.168.55:18182;
+    least_conn;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+
+upstream vopapi_mix {
+    server 10.170.168.15:18182;
+    server 10.170.168.16:18182;
+    server 10.170.168.17:18182;
+    server 10.170.168.18:18182;
+    server 10.170.168.19:18182;
+    server 10.170.168.20:18182;
+    server 10.170.168.34:18182;
+    server 10.170.168.35:18182;
+    server 10.170.168.36:18182;
+    server 10.170.168.37:18182;
+    server 10.170.168.38:18182;
+    server 10.170.168.39:18182;
+    server 10.170.168.58:18182;
+    server 10.170.168.59:18182;
+    least_conn;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+
+upstream echo_api_16k_zh{
+    sticky;
+    server 10.160.247.107:9080;
+    server 10.160.129.25:9080;
+    server 10.200.165.110:9080;
+    server 10.200.165.111:9080;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+ 
+upstream echo_api_8k_zh{
+    sticky;
+    server 10.160.129.28:9080;
+    server 10.160.129.29:9080;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+ 
+upstream echo_api_16k_en{
+    sticky;
+    server 10.160.129.80:9080;
+    server 10.160.129.81:9080;
+    check interval=3000 rise=3 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+
+upstream vopapi_8k {
+    server 10.160.129.157:18182;
+    server 10.160.129.158:18182;
+    server 10.160.129.159:18182;
+    server 10.160.129.160:18182;
+    server 10.160.129.161:18182;
+    server 10.160.129.162:18182;
+    server 10.170.168.21:18182;
+    server 10.170.168.22:18182;
+    server 10.170.168.23:18182;
+    server 10.170.168.24:18182;
+    server 10.170.168.25:18182;
+    server 10.170.168.26:18182;
+    server 10.170.168.27:18182;
+    server 10.170.168.28:18182;
+    server 10.170.168.29:18182;
+    server 10.170.168.30:18182;
+    server 10.170.168.31:18182;
+    server 10.170.168.32:18182;
+    server 10.170.168.40:18182;
+    server 10.170.168.41:18182;
+    server 10.170.168.42:18182;
+    server 10.170.168.43:18182;
+    server 10.170.168.44:18182;
+    server 10.170.168.45:18182;
+    server 10.170.168.46:18182;
+    server 10.170.168.47:18182;
+    server 10.170.168.48:18182;
+    server 10.170.168.49:18182;
+    server 10.170.168.50:18182;
+    server 10.170.168.51:18182;
+    server 10.170.168.52:18182;
+    server 10.170.168.53:18182;
+    server 10.170.168.54:18182;
+    server 10.170.168.60:18182;
+    server 10.170.168.61:18182;
+    server 10.170.168.62:18182;
+    server 10.170.168.63:18182;
+    server 10.170.168.64:18182;
+    server 10.170.168.65:18182;
+    server 10.170.168.66:18182;
+    server 10.170.168.67:18182;
+    server 10.170.168.68:18182;
+    server 10.170.168.69:18182;
+    server 10.170.168.70:18182;
+    server 10.170.168.71:18182;
+    server 10.170.168.72:18182;
+    server 10.170.168.73:18182;
+    server 10.170.168.74:18182;
+    server 10.170.168.75:18182;
+    server 10.170.168.76:18182;
+    server 10.170.168.77:18182;
+    server 10.170.168.78:18182;
+    server 10.170.168.79:18182;
+    server 10.170.168.80:18182;
+    server 10.170.168.81:18182;
+    server 10.170.168.82:18182;
+    server 10.170.168.83:18182;
+    least_conn;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+upstream vopapi_callback_en {
+    server 10.160.129.30:18182;
+    server 10.160.129.31:18182;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+
+upstream vopapi_callback_fast {
+    server 10.160.129.165:18189;
+    server 10.160.129.166:18189;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+
+upstream vopapi_callback_fasten {
+    server 10.160.129.167:18189;
+    server 10.160.129.168:18189;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+
+upstream jianwai_ec {
+    server 10.200.131.137:9070;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http default_down=false;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream ws_asr_api {
+    server 10.200.165.80:8080;
+    server 10.200.165.81:8080;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+upstream callback_v1_zh_16k {
+    server 10.160.129.32:18081;
+    server 10.160.129.33:18081;
+    server 10.200.165.92:8080;
+    server 10.200.165.93:8080;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+upstream stream_v1_zh_16k {
+    sticky name=STREAMV1ZH16K hmac=sha1 hmac_key=streamv1zh16k;
+    server 10.200.165.82:8080;
+    server 10.200.165.83:8080;
+    server 10.200.165.86:8080;
+    server 10.200.165.87:8080;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+upstream stream_v1_zh_8k {
+    sticky name=STREAMV1ZH8K hmac=sha1 hmac_key=streamv1zh8k;
+    server 10.200.165.84:8080;
+    server 10.200.165.85:8080;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+upstream ws_vi_v1_zh_16k {
+    server 10.160.129.163:18080;
+    server 10.160.129.164:18080;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}
+upstream curtime_online {
+    server 10.160.129.163:18080;
+    server 10.160.129.164:18080;
+    least_conn;
+    check interval=3000 rise=3 fall=3 timeout=50000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 20;
+}

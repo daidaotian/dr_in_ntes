@@ -1,0 +1,128 @@
+upstream upload {
+    server 172.17.0.42:8009 srun_id=upload-11;
+    server 172.17.0.43:8009 srun_id=upload-12;
+    server 172.17.0.44:8009 srun_id=upload-13;
+    server 172.17.0.45:8009 srun_id=upload-14;
+    server 172.17.0.46:8009 srun_id=upload-15;
+    server 172.17.0.49:8009 srun_id=upload-18;
+    keepalive 100;
+}
+upstream uploadhttp {
+    server 172.17.5.32:18180 weight=2;
+    server 172.17.5.33:18180 weight=2;
+    server 172.17.5.36:18180 weight=2;
+    server 10.172.130.48:8182 weight=1;
+    server 10.172.130.49:8182 weight=1;
+    server 10.172.130.50:8182 weight=1;
+    server 10.172.130.51:8182 weight=1;
+    server 10.172.130.52:8182 weight=1;
+    server 10.172.130.53:8182 weight=1;
+    server 10.172.130.54:8182 weight=1;
+    server 10.172.130.56:8182 weight=1;
+}
+upstream photo-rpc {
+    server 10.172.130.30:8183;
+    server 10.172.130.31:8183;
+    server 10.172.130.32:8183;
+    server 10.172.130.33:8183;
+}
+upstream game {
+    ip_hash;
+    server 10.120.144.183:8181;
+    server 10.120.144.184:8181;
+    server 10.120.151.108:8181;
+    server 10.120.151.109:8181;
+}
+upstream game-yun163 {
+    ip_hash;
+    server 10.201.104.138:8182;
+    server 10.201.104.139:8182;
+    server 10.201.104.140:8182;
+    server 10.201.104.141:8182;
+    server 10.201.104.142:8182;
+    server 10.201.104.143:8182;
+    server 10.201.104.139:8183;
+    server 10.201.104.140:8183;
+    server 10.201.104.141:8183;
+    server 10.201.104.142:8183;
+    server 10.201.104.143:8183;
+    keepalive 64;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http  default_down=false;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream gamerr-yun163 {
+    server 10.201.104.141:8182;
+    server 10.201.104.142:8182;
+    server 10.201.104.143:8182;
+    server 10.201.104.138:8182;
+    server 10.201.104.139:8182;
+    server 10.201.104.140:8182;
+    server 10.201.104.139:8183;
+    server 10.201.104.140:8183;
+    server 10.201.104.141:8183;
+    server 10.201.104.142:8183;
+    server 10.201.104.143:8183;
+    keepalive 64;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http  default_down=false;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream channel_app {
+    server 10.201.104.134:8383;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /channelapp/health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream game_frontend {
+    server 10.201.104.130:9191;
+    server 10.201.104.131:9191;
+    server 10.201.104.134:9191;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /frontend/report.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream wr.da.netease.com {
+    server 10.172.136.201:8088;
+    server 10.172.136.200:8088;
+    server 10.172.136.202:8088;
+    server 10.172.136.230:8088;
+    server 10.172.136.229:8088;
+    server 10.172.136.231:8088;
+}
+upstream forum-game-yixin {
+    server 10.201.104.130:8181;
+    server 10.201.104.131:8181;
+}
+upstream cloudgame-res-game {
+    server 10.201.104.135:8183;
+    server 10.201.104.136:8183;
+    server 10.201.104.137:8183;
+    keepalive 64;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http  default_down=false;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream cloudgame-res-frontend {
+    server 10.201.104.135:9192;
+    server 10.201.104.136:9192;
+    server 10.201.104.137:9192;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "HEAD /frontend/report.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream game_bg_frontend {
+    server 10.201.104.135:9394;
+    server 10.201.104.137:9394;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "HEAD /background/index.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream game_bg_frontend_res {
+        server 10.201.104.135:9393;
+        server 10.201.104.136:9393;
+        check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+        check_http_send "HEAD /background/index.html HTTP/1.0\r\n\r\n";
+        check_http_expect_alive http_2xx http_3xx;
+}

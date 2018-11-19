@@ -1,0 +1,443 @@
+# -*- Mode: Nginx -*-
+upstream backend_reg {
+    server 10.110.11.82:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.83:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.47:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.80:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.81:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.48:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.84:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.49:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.126:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.125:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.127:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.236:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.239:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.230:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.232:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.233:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.115:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.123:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.127:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.231:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.234:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.237:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.57:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.58:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.59:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.60:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.61:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.62:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.65:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.66:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.67:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.68:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.154:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.155:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.156:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.157:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.158:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.159:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.160:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.161:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.162:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.163:36902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.164:36902 max_fails=3 fail_timeout=15s weight=5;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http port=8082;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 256;
+}
+upstream backend_reg_bakupurs_fallback {
+    #server 10.110.11.226:8080 max_fails=3 fail_timeout=15s weight=1;
+    #server 10.110.11.227:8080 max_fails=3 fail_timeout=15s weight=1;
+    #server 10.110.11.229:8080 max_fails=3 fail_timeout=15s weight=1;
+    #server 10.110.11.230:8080 max_fails=3 fail_timeout=15s weight=1;
+    #server 10.110.11.231:8080 max_fails=3 fail_timeout=15s weight=1;
+    #server 10.110.11.232:8080 max_fails=3 fail_timeout=15s weight=1;
+    #server 10.110.11.233:8080 max_fails=3 fail_timeout=15s weight=1;
+    #server 10.110.11.234:8080 max_fails=3 fail_timeout=15s weight=1;
+    #server 10.110.11.235:8080 max_fails=3 fail_timeout=15s weight=1;
+    #server 10.110.11.210:8080 max_fails=3 fail_timeout=15s weight=1;
+    #server 10.110.11.211:8080 max_fails=3 fail_timeout=15s weight=1;
+    server 10.110.36.147:8080 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.36.148:8080 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.36.149:8080 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.36.150:8080 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.36.151:8080 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.36.152:8080 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.36.153:8080 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.36.154:8080 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.36.122:8080 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.36.123:8080 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.36.124:8080 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.36.125:8080 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.36.145:8080 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.36.146:8080 max_fails=3 fail_timeout=15s weight=5;
+    keepalive 256;
+}
+upstream backend_game {
+    server 10.110.11.123:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.122:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.85:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.120:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.121:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.124:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.119:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.21:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.22:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.29:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.35:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.36:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.38:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.43:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.44:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.45:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.69:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.70:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.71:36904 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.72:36904 max_fails=3 fail_timeout=15s weight=5;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http port=8085;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 128;
+}
+upstream backend_regother {
+    server 10.110.10.240:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.10.242:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.10.243:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.10.245:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.11.29:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.11.46:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.10.51:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.10.52:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.10.54:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.10.69:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.10.104:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.10.113:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.10.114:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.10.241:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.10.82:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.11.50:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.11.51:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.11.52:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.11.53:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.11.54:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.11.55:36901 max_fails=5 fail_timeout=30s weight=5;
+    server 10.110.11.56:36901 max_fails=5 fail_timeout=30s weight=5;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http port=8081;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 512;
+}
+upstream backend_reg_checkusername {
+    server 10.110.36.147:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.148:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.149:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.150:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.151:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.152:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.153:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.154:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.122:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.123:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.124:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.125:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.145:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.146:36901 max_fails=5 fail_timeout=30s weight=10;
+    #server 10.110.11.226:36901 max_fails=5 fail_timeout=30s weight=10;
+    #server 10.110.11.227:36901 max_fails=5 fail_timeout=30s weight=10;
+    #server 10.110.11.229:36901 max_fails=5 fail_timeout=30s weight=10;
+    #server 10.110.11.230:36901 max_fails=5 fail_timeout=30s weight=10;
+    #server 10.110.11.231:36901 max_fails=5 fail_timeout=30s weight=10;
+    #server 10.110.11.232:36901 max_fails=5 fail_timeout=30s weight=10;
+    #server 10.110.11.233:36901 max_fails=5 fail_timeout=30s weight=10;
+    #server 10.110.11.234:36901 max_fails=5 fail_timeout=30s weight=10;
+    #server 10.110.11.235:36901 max_fails=5 fail_timeout=30s weight=10;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http port=8081;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 256;
+}
+upstream backend_reg_qcode {
+    server 10.110.10.240:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.10.242:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.10.243:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.10.245:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.11.29:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.11.46:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.10.51:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.10.52:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.10.54:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.10.69:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.10.82:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.10.104:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.10.113:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.10.114:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.10.241:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.10.82:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.11.50:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.11.51:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.11.52:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.11.53:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.11.54:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.11.55:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.11.56:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.147:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.148:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.149:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.150:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.151:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.152:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.153:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.154:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.122:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.123:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.124:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.125:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.145:36901 max_fails=5 fail_timeout=30s weight=10;
+    server 10.110.36.146:36901 max_fails=5 fail_timeout=30s weight=10;
+    #server 10.110.11.226:36901 max_fails=5 fail_timeout=30s weight=5;
+    #server 10.110.11.227:36901 max_fails=5 fail_timeout=30s weight=5;
+    #server 10.110.11.229:36901 max_fails=5 fail_timeout=30s weight=5;
+    #server 10.110.11.230:36901 max_fails=5 fail_timeout=30s weight=5;
+    #server 10.110.11.231:36901 max_fails=5 fail_timeout=30s weight=5;
+    #server 10.110.11.232:36901 max_fails=5 fail_timeout=30s weight=5;
+    #server 10.110.11.233:36901 max_fails=5 fail_timeout=30s weight=5;
+    #server 10.110.11.234:36901 max_fails=5 fail_timeout=30s weight=5;
+    #server 10.110.11.235:36901 max_fails=5 fail_timeout=30s weight=5;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http port=8081;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 256;
+}
+upstream backend_mail  {
+    server 10.110.11.82:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.83:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.47:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.80:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.81:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.48:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.84:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.49:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.126:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.125:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.127:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.236:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.239:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.230:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.232:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.233:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.115:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.123:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.127:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.231:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.234:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.237:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.57:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.58:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.59:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.60:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.61:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.62:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.65:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.66:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.67:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.68:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.154:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.155:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.156:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.157:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.158:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.159:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.160:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.161:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.162:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.163:26902 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.164:26902 max_fails=3 fail_timeout=15s weight=5;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http port=8083;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 512;
+}
+upstream backend_pop3  {
+    server 10.110.11.123:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.122:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.85:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.120:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.121:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.124:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.119:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.21:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.22:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.29:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.35:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.36:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.38:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.43:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.44:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.10.45:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.69:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.70:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.71:36903 max_fails=3 fail_timeout=15s weight=5;
+    server 10.110.11.72:36903 max_fails=3 fail_timeout=15s weight=5;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http port=8084;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 512;
+}
+upstream wrda {
+    server 10.112.128.220;
+    server 10.112.128.221;
+    server 10.110.10.190;
+    server 10.110.10.198;
+}
+
+upstream pcard_pay {
+    sticky name=WEBPAY hmac=sha1 hmac_key=urspay;
+    server 10.110.11.76;
+    server 10.110.11.86;
+    server 10.100.10.96;
+    server 10.100.10.97;
+    server 10.100.10.98;
+    server 10.110.10.223;
+}
+upstream pcard_paykf {
+    server 10.110.10.238:6220;
+    server 10.100.10.100:6220;
+}
+upstream pcard_payps {
+    sticky name=PAYPS hmac=sha1 hmac_key=urspayps;
+    server 10.110.11.88:17088;
+    server 10.100.10.99:17088;
+}
+upstream pcard_payapi {
+    server 10.110.11.77:6220;
+    server 10.110.11.87:6220;
+    server 10.100.10.93:6220;
+    server 10.100.10.104:6220;
+    server 10.100.10.95:6220;
+    server 10.110.10.224:6220;
+}
+upstream nOuterLogin {
+   server 10.110.11.104:8181;
+   server 10.110.11.105:8181;
+   server 10.110.11.106:8181;
+   server 10.110.11.107:8181;
+   server 10.112.137.96:8181;
+   server 10.112.137.97:8181;
+   server 10.112.137.98:8181;
+   server 10.112.137.99:8181;
+   server 10.112.137.100:8181;
+}
+upstream captcha {
+   server 10.112.137.126:8181;
+   server 10.112.137.127:8181;
+}
+upstream captchav15 {
+    #server 10.112.137.126:8182 weight=25;
+    #server 10.112.137.127:8182 weight=25;
+    #server 10.112.137.173:8182 weight=25;
+    #server 10.112.137.174:8182 weight=25;
+    server 10.110.10.187:8288  weight=25;
+    server 10.110.10.168:8288  weight=25;
+    server 10.110.36.28:8288  weight=25;
+    server 10.110.36.26:8288  weight=25;
+
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /status.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream captchav2 {
+    server 10.110.36.26:8388  weight=25;
+    server 10.110.36.28:8388  weight=25;
+    server 10.110.10.168:8388  weight=25;
+    server 10.110.10.187:8388  weight=25;
+
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /status.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream regcaptchaverify {
+    server 10.110.36.32:8388  weight=25;
+    server 10.110.36.33:8388  weight=25;
+
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /status.html HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream urswechat {
+    server 10.112.137.134:8181;
+}
+upstream backend_ekey {
+    sticky name=JSESSIONID0 path=/;
+    server 10.110.11.89:36906 max_fails=2 fail_timeout=30s;
+    server 10.110.11.90:36906 max_fails=2 fail_timeout=30s;
+    keepalive 128;
+}
+upstream backend_otpms {
+    sticky name=OTPMSADMIN  hmac=sha1 hmac_key=otplogin;
+    server 10.110.11.91:26908 weight=2 max_fails=2 fail_timeout=30s;
+    server 10.110.11.92:26908 weight=2 max_fails=2 fail_timeout=30s;
+    keepalive 1024;
+}
+upstream backend_otphttp {
+    server 10.110.11.93:31280 weight=2 max_fails=2 fail_timeout=30s;
+    server 10.110.11.94:31280 weight=2 max_fails=2 fail_timeout=30s;
+}
+
+upstream factorreg {
+     server 10.112.137.79:8081;
+     server 10.110.11.98:8081;
+}
+
+upstream aqapp {
+     server 10.110.11.114:8181;
+     server 10.110.11.115:8181;
+     server 10.110.11.116:8181;
+}
+
+upstream backend_pwd {
+     server 10.110.11.151:8181 max_fails=5 fail_timeout=30s;
+     server 10.110.11.152:8181 max_fails=5 fail_timeout=30s;
+     keepalive 256;
+}
+
+
+upstream huicluster {
+    server 10.110.11.171:8080 max_fails=3 fail_timeout=15s weight=1;
+    server 10.110.11.172:8080 max_fails=3 fail_timeout=15s weight=1;
+    server 10.110.11.173:8080 max_fails=3 fail_timeout=15s weight=1;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http port=8080;
+    check_http_send "GET /health/active HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+    keepalive 256;
+}
+
+upstream ursdesk-up {
+    server 10.110.10.31:8181;
+}
+
+upstream ursdesk-api {
+    server 10.110.11.208:8181;
+    server 10.110.11.230:8181;
+    server 10.110.11.229:8181;
+}
+
+upstream dscserver {
+    server 10.110.11.226:8181;
+    server 10.110.11.227:8181;
+}
+upstream backend_invoke_pointcard  {
+    server 10.110.10.165:26905 weight=2 max_fails=2 fail_timeout=30s;
+    server 10.110.10.161:26905 weight=2 max_fails=2 fail_timeout=30s;
+    keepalive 1024;
+}
+
+upstream ursstatic {
+    server 10.110.11.21;
+    server 10.110.11.22;
+    server 10.110.11.23;
+    server 10.110.11.153;
+    server 10.110.11.174;
+}

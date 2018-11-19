@@ -1,0 +1,19 @@
+upstream gacha {
+    server 10.164.196.85:8080;
+    server 10.164.196.86:8080;
+}
+
+upstream manager-gacha {
+    server 10.164.196.70:8081;
+    server 10.164.196.69:8081;
+}
+
+upstream api-gacha {
+    server 10.164.196.78:8181;
+    server 10.164.196.79:8181;
+}
+
+upstream gacha-cdn {
+    server 10.164.196.108;
+    server 10.164.196.109;
+}

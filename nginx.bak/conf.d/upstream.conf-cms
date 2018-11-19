@@ -1,0 +1,41 @@
+upstream cms-cache-nginx {
+    server 10.102.169.36:1080;
+    server 10.102.169.37:1080;
+    server 10.102.169.40:1080;
+    server 10.102.169.41:1080;
+    server 10.102.169.38:1080;
+    server 10.102.169.39:1080;
+    server 10.112.177.37:1080;
+    server 10.112.177.38:1080;
+    server 10.112.177.39:1080;
+    server 10.112.177.40:1080;
+    server 10.112.177.41:1080;
+    server 10.112.177.42:1080;
+    keepalive 256;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream cms-www-nginx {
+    server 10.112.177.32:1080;
+    server 10.112.177.33:1080;
+    server 10.112.177.49:1080;
+    server 10.112.177.52:1080;
+    server 10.102.169.23:1080;
+    server 10.102.169.22:1080;
+    server 10.102.169.54:1080;
+    server 10.102.169.55:1080;
+    keepalive 256;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream file.ws.126.net {
+    server 172.19.1.69:8080;
+    keepalive 128;
+}
+upstream api-cms-disconf {
+    server 10.102.169.113:8181;
+    server 10.102.169.114:8181;
+}

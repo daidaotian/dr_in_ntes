@@ -1,0 +1,6 @@
+upstream lofter-hz-bgp {
+    server 123.58.180.165;
+    server 123.58.180.166;
+    server 123.58.180.163 backup;
+    server 123.58.180.164 backup;
+}

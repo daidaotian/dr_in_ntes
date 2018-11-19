@@ -1,0 +1,647 @@
+# -*- Mode: Nginx -*-
+upstream  comment-news{
+    #server comment.2012.163.com.wscdns.com:80;
+    #server  223.252.199.5:80;
+    #server  223.252.199.7:80;
+    server 59.111.19.10:80;
+    keepalive 16;
+}
+
+upstream nc-news-service {
+    # varnish server
+    server 10.112.151.81:8080;
+    server 10.112.151.80:8080;
+}
+upstream nc-newstopic {
+    # varnish server
+    server 10.112.151.81:8080;
+    server 10.112.151.80:8080;
+}
+upstream logic-luobo {
+    server 10.112.151.133:8080;
+    server 10.112.151.134:8080;
+    server 10.112.151.137:8080;
+    check interval=5000 rise=2 fall=2 timeout=3000 type=http port=8080;
+    check_http_send "GET /alive HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nc-search {
+    server 192.168.86.171:8080;
+    server 10.100.20.100:8080;
+}
+upstream live-open {
+    server 10.112.146.14:1080;
+    server 10.112.146.15:1080;
+    # bjyz-live-open{1~2}
+    server 10.102.157.6:1080;
+    server 10.102.157.7:1080;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream live-pcweb {
+    server  10.112.181.38:1080;
+    server 10.102.157.45:1080;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream live-partake {
+    server 10.112.141.13:1080;
+    server 10.112.141.14:1080;
+    # bjyz-live-partake{1~3}
+    server 10.102.157.17:1080;
+    server 10.102.157.18:1080;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream live-main {
+    server 10.112.131.155:1080;
+    server 10.112.131.152:1080;
+    server 10.102.157.13:1080;
+    server 10.102.157.14:1080;
+    server 10.102.157.15:1080;
+    server 10.102.157.16:1080;
+    server 10.112.131.59:1080;
+    server 10.112.131.25:1080;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream sharefile {
+    server 10.112.177.13:8181;
+    server 10.102.169.6:8181 backup;
+}
+upstream article-cms {
+    server 10.102.169.89:8181;
+    server 10.102.169.90:8181;
+    server 10.112.177.83:8181;
+    server 10.112.177.84:8181;
+    server 10.102.169.109:8181;
+    server 10.102.169.110:8181;
+    server 10.112.177.123:8181;
+    server 10.112.177.124:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream model-cms {
+    server  10.112.177.14:8181;
+    server 10.102.169.5:8181 backup;
+}
+upstream upload-buzz {
+    server 10.112.151.198;
+    server 10.112.151.199;
+    server 10.112.151.200;
+    server 10.112.151.201;
+    server 10.102.135.92;
+    server 10.102.135.93;
+    server 10.102.135.94;
+    server 10.102.135.95;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /lvs HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream comment-service {
+    server 172.19.1.49:8080 weight=5;
+    server 172.19.1.53:8080 weight=5;
+    server 10.102.135.117:8080 weight=1;
+    server 10.102.135.118:8080 weight=1;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /alive HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nc-news-photo {
+    server  106.39.242.27:80;
+    server  106.39.242.29:80;
+}
+
+upstream nc-news-service-video {
+    server  10.112.142.55:8181;
+    server  10.112.142.56:8181;
+    server  10.102.152.186:8181;
+    server  10.102.152.185:8181;
+}
+upstream tagslib-cms {
+    server 10.112.177.53:8181;
+    server 10.112.177.54:8181;
+}
+
+upstream bjac-nis-service {
+    server 10.102.173.8:8190;
+    server 10.102.173.10:8190;
+    server 10.112.140.205:8190;
+    server 10.112.140.206:8190;
+    server 10.102.173.27:8190;
+    server 10.102.173.28:8190;
+    server 10.112.140.244:8190;
+    server 10.112.140.245:8190;
+    check interval=3000 rise=3 fall=3 timeout=10000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx;
+}
+
+upstream usercenter.api.3g.163.com {
+    server 10.112.142.33:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.112.142.77:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.112.142.76:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.102.152.163:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.102.152.164:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.102.152.165:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.102.152.135:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.102.152.253:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.102.152.254:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.102.152.130:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.112.142.252:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.112.142.249:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.112.142.250:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.112.142.251:8181 max_fails=2 fail_timeout=30 weight=2;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nc-news-rec {
+    server 10.112.142.55:8181;
+    server 10.112.142.56:8181;
+    server 10.102.152.185:8181;
+    server 10.102.152.186:8181;
+    server 10.112.142.133:8181;
+    server 10.112.142.100:8181;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http default_down=false;
+    check_http_send "GET /nc/health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nc-internal {
+    server 10.112.142.212:8181;
+    server 10.112.142.213:8181;
+    server 10.102.152.236:8181;
+    server 10.102.152.237:8181;
+}
+upstream search.3g.163.com {
+    server 192.168.86.171:8080;
+    server 10.100.20.100:8080;
+}
+upstream wemedia-internal {
+    server 10.112.142.183:8184;
+    server 10.112.142.203:8184;
+    server 10.102.189.53:8184;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream wemedia-upload {
+    server 10.102.189.154:8186;
+    server 10.112.179.24:8186;
+}
+upstream cms-ws {
+    server 10.112.141.221:7080;
+    server 10.112.141.222:7080;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream cms-clean {
+    server 10.112.177.114:1080;
+    server 10.102.169.103:1080;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream usercenter.special.163.com {
+    server 10.102.152.166:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.102.152.167:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.112.142.78:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.112.142.79:8181 max_fails=2 fail_timeout=30 weight=2;
+}
+upstream auto-webservice {
+    server 10.112.151.179:1080;
+    server 10.112.151.17:1080;
+}
+
+upstream auto-scsservice {
+    server 10.102.181.23:1080;
+    server 10.102.181.24:1080;
+}
+
+upstream touch-wap3g {
+    server 10.112.151.2:8181;
+    server 10.112.151.5:8181;
+    server 10.112.151.6:8181;
+    server 10.102.135.24:8181;
+    server 10.102.135.25:8181;
+    server 10.102.135.26:8181;
+    server 10.102.135.172:8181;
+    server 10.102.135.175:8181;
+    server 10.112.151.52:8181;
+    server 10.112.151.67:8181;
+}
+upstream videolib {
+    server 10.102.135.161:80  max_fails=3 fail_timeout=120s;
+    server 10.112.151.51:80  max_fails=3 fail_timeout=120s;
+    server 10.112.151.29:80  max_fails=3 fail_timeout=120s;
+    server 10.112.151.33:80  max_fails=3 fail_timeout=120s;
+    server 10.112.151.32:80  max_fails=3 fail_timeout=120s;
+    keepalive 256;
+}
+
+upstream 3gpay-service {
+    server 10.102.132.196:8181;
+    server 10.102.132.198:8181;
+    server 10.102.132.247:8181;
+    server 10.112.146.46:8181;
+    server 10.112.131.192:8181;
+    server 10.112.131.193:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "GET /m-pay/health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream bjncappconfig.internal.api.163.com {
+    server 10.112.142.161:8181 max_fails=2 fail_timeout=30s;
+    server 10.112.142.162:8181 max_fails=2 fail_timeout=30s;
+    server 10.102.152.203:8181 max_fails=2 fail_timeout=30s;
+    server 10.112.142.211:8181 max_fails=2 fail_timeout=30s;
+    server 10.102.152.202:8181 max_fails=2 fail_timeout=30s;
+}
+upstream cms-modelcenter {
+    server 10.112.177.128:8181;
+    server 10.112.177.129:8181;
+    server 10.102.169.116:8181;
+    server 10.102.169.115:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream nginx-wap3g {
+    server 10.112.173.2:6081 max_fails=2 fail_timeout=10 weight=1;
+    server 10.112.173.3:6081 max_fails=2 fail_timeout=10 weight=1;
+    server 10.112.173.4:6081 max_fails=2 fail_timeout=10 weight=1;
+    server 10.112.173.5:6081 max_fails=2 fail_timeout=10 weight=1;
+    server 10.112.173.6:6081 max_fails=2 fail_timeout=10 weight=1;
+    server 10.112.173.8:6081 max_fails=2 fail_timeout=10 weight=1;
+    server 10.112.173.9:6081 max_fails=2 fail_timeout=10 weight=1;
+    server 10.112.173.10:6081 max_fails=2 fail_timeout=10 weight=1;
+}
+upstream pic-backend {
+  server 10.112.141.211:8080;
+  server 10.112.141.212:8080;
+  server 10.112.141.213:8080;
+  server 10.112.141.214:8080;
+  check interval=3000 rise=2 fall=3 timeout=10000 type=http default_down=false;
+  check_http_send "GET /lvs HTTP/1.0\r\n\r\n";
+  check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream lpkwshouse-servicelb {
+    server 10.112.157.71:8181 weight=1;
+    server 10.112.157.70:8181 weight=1;
+    server 10.112.164.123:8181 weight=1;
+}
+
+upstream relatedoc-service {
+    server 10.112.146.220:8181;
+    server 10.112.146.221:8181;
+    server 10.112.146.222:8181;
+    check interval=5000 rise=2 fall=2 timeout=3000 type=http port=8181;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream blacklimit.nc.service.163.org {
+    server 10.112.142.64:8181 weight=3 max_fails=5;
+    server 10.112.142.65:8181 weight=3 max_fails=5;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http default_down=false;
+    check_http_send "GET /uc/blacklimit/health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream luobodispatch-v {
+    server 10.112.151.135:8080;
+    server 10.112.151.136:8080;
+    check interval=5000 rise=2 fall=2 timeout=3000 type=http port=8080;
+    check_http_send "GET /alive HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream luoboapiv {
+    server 10.112.151.138:8080;
+    server 10.112.151.139:8080;
+    server 10.112.151.140:8080;
+    check interval=5000 rise=2 fall=2 timeout=3000 type=http port=8080;
+    check_http_send "GET /alive HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream bjmachine-service {
+    server 172.19.1.54:13088;
+    server 172.19.1.48:13088;
+}
+
+upstream tadw3g-service {
+  server 10.112.173.61:8181;
+  server 10.112.173.57:8181;
+  server 10.112.173.53:8181;
+  server 10.112.173.58:8181;
+  server 10.112.173.59:8181;
+  server 10.112.173.51:8181;
+  server 10.112.173.55:8181;
+  server 10.112.173.62:8181;
+  server 10.112.173.60:8181;
+  server 10.112.173.52:8181;
+  server 10.112.173.54:8181;
+  server 10.112.173.56:8181;
+  check interval=3000 rise=2 fall=3 timeout=10000 type=http;
+  check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+  check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlp-service-wz {
+    server 192.168.86.161:19898;
+    server 192.168.86.162:19898;
+    server 192.168.86.163:19898;
+    check interval=3000 rise=2 fall=3 timeout=10000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nlp-video-duplicate {
+    server 192.168.86.161:19899;
+    server 192.168.86.162:19899;
+    server 192.168.86.163:19899;
+    check interval=3000 rise=2 fall=3 timeout=10000 type=http;
+    check_http_send "GET /health HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream kwws-service {
+    server 10.112.173.171:8181;
+    server 10.102.154.177:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /kw/alive HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream auditws-service {
+    server 10.112.173.249:8181;
+    server 10.102.154.191:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /audit/alive HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream cp-ws-service {
+     server 10.112.173.65:8090;
+     server 10.112.173.66:8090;
+     server 10.112.173.68:8090;
+     server 10.102.154.180:8090;
+     server 10.102.154.181:8090;
+     server 10.102.154.183:8090;
+     check interval=5000 rise=2 fall=2 timeout=3000 type=http port=8090;
+     check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+     check_http_expect_alive http_2xx http_3xx;
+}
+upstream search-audit {
+    server 10.112.173.94:8181;
+    server 10.112.173.183:8181;
+    check interval=3000 rise=2 fall=5 timeout=1000 type=http;
+    check_http_send "HEAD /ndp/health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream auto-mobile-common-api {
+    server 10.102.154.218:1080;
+    server 10.102.154.219:1080;
+}
+upstream mpay.nc.163.com {
+    server 10.102.189.149:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.102.189.150:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.102.189.151:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.102.189.152:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.102.189.158:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.102.189.159:8181 max_fails=2 fail_timeout=30 weight=1;
+}
+upstream cms-cmsapi {
+    server 10.112.177.23:8181;
+    server 10.112.177.24:8181;
+    server 10.102.169.14:8181;
+    server 10.102.169.15:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream arws-service {
+    server 10.102.169.27:8181;
+    server 10.102.169.29:8181;
+    server 10.112.177.137:8181;
+    server 10.112.177.136:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream audit-service {
+    server 10.102.154.189:8090;
+    server 10.112.173.247:8090;
+    server 10.102.154.190:8090;
+    server 10.112.173.248:8090;
+    server 10.112.141.25:8090;
+    server 10.112.141.26:8090;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream upldbuz-service {
+    server  10.112.151.198:80;
+    server  10.112.151.201:80;
+    server  10.112.151.199:80;
+    server  10.112.151.200:80;
+    server  10.102.135.93:80;
+    server  10.102.135.94:80;
+    server  10.102.135.92:80;
+    server  10.102.135.95:80;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+
+upstream imgws-service {
+    server 10.102.154.240:8181;
+    server 10.112.154.84:8181;
+    server 10.102.154.239:8181;
+    server 10.112.154.85:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /antirubbish/alive HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream media.push.register.163.com {
+    server 10.172.97.206:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.172.97.207:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.172.97.208:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.172.97.209:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.122.175.37:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.122.175.38:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.122.175.39:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.122.175.40:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.122.175.119:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.122.175.120:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.122.175.121:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.122.175.122:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.172.97.155:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.172.97.156:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.172.97.157:8181 max_fails=2 fail_timeout=30 weight=1;
+    server 10.172.97.158:8181 max_fails=2 fail_timeout=30 weight=1;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http;
+    check_http_send "GET /media/push/register/api/health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream broadcast-media-push-api-163-com {
+    server 10.122.175.142:8181 max_fails=2 fail_timeout=5s;
+    server 10.122.175.143:8181 max_fails=2 fail_timeout=5s;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http default_down=false;
+    check_http_send "GET /media/push/broadcast/health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nc-service-readerapi {
+    server 10.112.179.79:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.112.179.80:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.112.179.81:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.112.179.82:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.102.189.202:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.102.189.203:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.102.189.204:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.102.189.205:8181 max_fails=2 fail_timeout=30 weight=2;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http default_down=false;
+    check_http_send "GET /reader/api/health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream nc-service-readerbackend {
+    server 10.112.179.91:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.112.179.92:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.102.189.206:8181 max_fails=2 fail_timeout=30 weight=2;
+    server 10.102.189.207:8181 max_fails=2 fail_timeout=30 weight=2;
+    check interval=3000 rise=2 fall=3 timeout=3000 type=http default_down=false;
+    check_http_send "GET /reader/backend/health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream wpic {
+    server 10.102.135.5:1080;
+    server 10.102.135.82:1080;
+    server 10.112.157.130:1080;
+    server 10.112.157.131:1080;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream cangjiebj-docvulgar {
+    server 10.102.156.81:9001;
+    server 10.102.156.82:9001;
+}
+upstream cangjiebj-videovulgar {
+    server 10.102.156.85:9001;
+    server 10.102.156.86:9001;
+}
+upstream cangjiebj-longtime-video {
+    server 10.102.156.79:9999;
+    server 10.102.156.80:9999;
+}
+upstream cangjiebj-longtime-text {
+    server 10.112.140.143:9999;
+    server 10.112.140.144:9999;
+}
+upstream cangjiebj-clickbait-text {
+    server 10.102.156.77:9000;
+    server 10.102.156.78:9000;
+}
+upstream cangjiebj-clickbait-video {
+    server 10.102.156.83:9000;
+    server 10.102.156.84:9000;
+}
+upstream privilege-ws {
+    server 10.102.169.66:1080;
+    server 10.102.169.67:1080;
+    server 10.112.131.240:1080;
+    server 10.112.131.241:1080;
+}
+upstream newcms-ws {
+    server 10.112.131.252:8080;
+    server 10.112.131.251:8080;
+    server 10.102.169.63:8080;
+    server 10.102.169.65:8080;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream cangjiebj-titlecorr {
+    server 10.102.156.91:9002;
+    server 10.102.156.92:9002;
+}
+upstream cangjiebj-oldnews {
+    server 10.102.156.96:9003;
+    server 10.102.156.96:9004;
+    server 10.102.156.96:9005;
+    server 10.102.156.96:9006;
+    server 10.102.156.97:9003;
+    server 10.102.156.97:9004;
+    server 10.102.156.97:9005;
+    server 10.102.156.97:9006;
+}
+upstream iphunter-ws {
+    server 10.102.154.229:8080;
+    server 10.102.154.230:8080;
+    server 10.102.154.231:8080;
+    server 10.102.154.233:8080;
+    server 10.102.154.232:8080;
+    check interval=5000 rise=2 fall=3 timeout=7000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream ai-bj-service {
+    server 10.102.156.93:9001;
+    server 10.102.156.94:9001;
+    server 10.102.156.95:9001;
+}
+upstream nc-service-playlist-open {
+    server 10.112.179.101:8182 max_fails=2 fail_timeout=30 weight=1;
+    server 10.102.189.225:8182 max_fails=2 fail_timeout=30 weight=1;
+    check interval=3000 rise=2 fall=3 timeout=10000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream spider-wechat {
+    server 10.112.179.102:8181;
+    server 10.112.142.187:8181;
+    server 10.102.189.229:8181;
+    server 10.102.189.227:8181;
+    server 10.102.189.226:8181;
+    server 10.102.189.228:8181;
+    check interval=5000 rise=2 fall=3 timeout=7000 type=http;
+    check_http_send "GET /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream cangjiebj-docadvertise {
+    server 10.102.156.98:9003;
+    server 10.102.156.98:9004;
+    server 10.102.156.99:9003;
+    server 10.102.156.99:9004;
+}
+upstream fclpkinternalws-lpkinternalws {
+    server 10.112.151.98:8080;
+    server 10.112.151.95:8080;
+    server 10.112.151.97:8080;
+    server 10.112.151.96:8080;
+    check interval=3000 fall=3 rise=2 timeout=1000 type=tcp;
+}
+upstream clientphoto-service {
+    server 10.112.141.214:8080;
+    server 10.112.141.213:8080;
+    server 10.112.141.211:8080;
+    server 10.112.141.212:8080;
+}
+upstream cangjiebj-summarization {
+    server 10.102.156.100:9001;
+    server 10.102.156.100:9002;
+    server 10.102.156.101:9001;
+    server 10.102.156.101:9002;
+    server 10.102.156.102:9001;
+    server 10.102.156.102:9002;
+}
+upstream nc-gateway-servers {
+    server 10.112.184.135:8761;
+    server 10.112.142.182:8761;
+}

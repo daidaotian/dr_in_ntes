@@ -1,0 +1,15 @@
+upstream nos.netease.com {
+    server 223.252.216.56:80;
+    server 223.252.216.57:80;
+    keepalive 32;
+}
+upstream nos-yx.netease.com {
+    server 223.252.216.58:80;
+    server 223.252.216.59:80;
+    keepalive 32;
+}
+upstream fcnos {
+    server 223.252.198.92;
+    server 223.252.198.93;
+    keepalive 32;
+}

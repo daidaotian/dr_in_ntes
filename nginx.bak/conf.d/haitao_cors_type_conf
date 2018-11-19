@@ -1,0 +1,38 @@
+set $origin_host "";
+set $is_cors "false";
+set $cors_type "others";
+
+if ($http_origin ~* ^https?://([a-zA-Z0-9\.\-]+)) {
+    set $origin_host $1;
+}
+
+if ($origin_host ~* ^[\w-]+\.kaola\.com(\.\w+)?(:\d+)?$) {
+    set $is_cors "true";
+}
+
+if ($origin_host = $host) {
+    set $is_cors "false";
+}
+
+if ($request_method = "OPTIONS") {
+    set $cors_type "options";
+}
+
+if ($is_cors = "false") {
+    set $cors_type "";
+}
+
+if ($cors_type = "options") {
+    add_header "Access-Control-Allow-Origin" "$http_origin";
+    add_header "Access-Control-Allow-Methods" "GET,HEAD,POST,PUT,DELETE,TRACE,OPTIONS,PATCH";
+    add_header "Access-Control-Allow-Headers" "Content-Type,X-Requested-With,ursAuth,origin,ursid, urstoken,x-test";
+    add_header "Access-Control-Allow-Credentials" "true";
+    add_header "Access-Control-Max-Age" "86400";
+    add_header "Content-Type" "text/plain charset=UTF-8";
+    add_header "Content-Length" 0;
+    return 204;
+}
+if ($cors_type = "others") {
+    add_header "Access-Control-Allow-Origin" "$http_origin";
+    add_header "Access-Control-Allow-Credentials" "true";
+}

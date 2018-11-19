@@ -1,0 +1,17 @@
+# ddos related zone
+limit_access_zone zone=ddoshaitaoip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddoshaitaohost:10M bucket_number=10007 type=$host;
+limit_access_zone zone=ddoshaitaouri:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddoshaitaoip $haitao_access_deny_ip;
+limit_access_variable zone=ddoshaitaohost $haitao_access_deny_host;
+limit_access_variable zone=ddoshaitaouri $haitao_access_deny_uri;
+
+limit_access_zone zone=ddosquhuaip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddosquhuauri:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddosquhuaip $quhua_access_deny_ip;
+limit_access_variable zone=ddosquhuauri $quhua_access_deny_uri;
+
+limit_access_zone zone=ddosstarip:10M bucket_number=10007 type=ip;
+limit_access_zone zone=ddosstaruri:10M bucket_number=10007 type=$uri;
+limit_access_variable zone=ddosstarip $star_access_deny_ip;
+limit_access_variable zone=ddosstaruri $star_access_deny_uri;

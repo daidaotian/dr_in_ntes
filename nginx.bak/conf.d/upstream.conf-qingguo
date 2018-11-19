@@ -1,0 +1,163 @@
+# -*- Mode: Nginx -*-
+upstream apppre-x-ws {
+    server 10.172.137.14:8383;
+    server 10.172.137.15:8383;
+}
+upstream appx-ws {
+    server 10.201.217.11:8383;
+    server 10.201.217.10:8383;
+    server 10.201.217.8:8383;
+    server 10.201.217.5:8383;
+}
+
+upstream qingguoapp {
+    server 10.164.160.148:8181;
+    server 10.164.160.149:8181;
+    server 10.164.160.152:8181;
+    server 10.164.160.155:8181;
+    server 10.122.182.16:8181;
+    server 10.122.182.17:8181;
+    server 10.122.182.18:8181;
+    server 10.122.182.19:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream qingguo-apppre {
+    server 10.172.137.5:8181;
+}
+upstream qingguobackend {
+    server 10.172.137.7:8181;
+    server 10.172.137.8:8181;
+    server 10.172.137.10:8181;
+    server 10.164.160.131:8181;
+    server 10.164.160.134:8181;
+    keepalive 20;
+}
+upstream qingguo-checkuser {
+    server 10.122.182.16:8181;
+    server 10.122.182.17:8181;
+    server 10.122.182.18:8181;
+    server 10.122.182.19:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream qingguo-common {
+    server 10.172.137.7:8181;
+    server 10.172.137.8:8181;
+    server 10.172.137.10:8181;
+    server 10.164.160.131:8181;
+    server 10.164.160.134:8181;
+}
+upstream qingguo-devcheck {
+    server 10.164.160.148:8181;
+    server 10.164.160.149:8181;
+}
+upstream qingguo-cloudhk {
+    server 10.160.215.91;
+    server 10.160.215.92;
+}
+
+upstream qingguosmartcamerapre {
+    server 10.172.137.5:8383;
+}
+upstream qingguosquare {
+    server 10.164.160.151:8484;
+    server 10.164.160.150:8484;
+    server 10.164.160.146:8484;
+    server 10.164.160.147:8484;
+}
+upstream qingguoweb {
+    server 10.120.104.137:8181;
+    server 10.120.104.138:8181;
+}
+
+upstream qingguo-yixin {
+    server 10.164.160.152:8181;
+    server 10.164.160.155:8181;
+    server 10.122.182.16:8181;
+    server 10.122.182.17:8181;
+    server 10.122.182.18:8181;
+    server 10.122.182.19:8181;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream qlive-marketinglive2 {
+    server 10.164.160.146:8686;
+    server 10.164.160.147:8686;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream qliveother {
+    server 10.164.160.138:8686;
+    server 10.164.160.139:8686;
+    server 10.172.137.16:8686;
+    server 10.172.137.17:8686;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream qliveroot {
+    server 10.164.160.146:8484;
+    server 10.164.160.147:8484;
+    server 10.164.160.151:8484;
+    server 10.164.160.150:8484;
+    server 10.122.182.16:8484;
+    server 10.122.182.17:8484;
+    server 10.122.182.18:8484;
+    server 10.122.182.19:8484;
+    check interval=3000 rise=2 fall=3 timeout=5000 type=http default_down=false;
+    check_http_send "HEAD /health/status HTTP/1.0\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx;
+}
+upstream qlivetest-smartcamera-ws {
+    server 10.165.153.136:8484;
+    server 10.165.153.134:8484;
+}
+upstream smartcamera-ws {
+    server 10.165.153.136:8383;
+    server 10.165.153.134:8383;
+}
+upstream smartdevicetest {
+    server 10.164.141.24:8383;
+}
+upstream smartlive {
+    server 10.164.141.24:8484;
+}
+upstream wr.da.netease.com {
+    server 10.172.136.201:8088;
+    server 10.172.136.200:8088;
+    server 10.172.136.202:8088;
+    server 10.172.136.230:8088;
+    server 10.172.136.229:8088;
+    server 10.172.136.231:8088;
+}
+
+upstream qlive-qyapi {
+    server 10.201.217.2:8080;
+    server 10.201.217.6:8080;
+    server 10.201.217.7:8080;
+    server 10.201.217.9:8080;
+}
+
+upstream qlivetstyxim-ws {
+    server 10.165.153.136:8383;
+    server 10.165.153.134:8383;
+}
+
+upstream qlivepre-yximws {
+    server 10.172.137.14:8383;
+    server 10.172.137.15:8383;
+}
+
+upstream qlive163-statistics {
+    server 10.201.217.2:8585;
+    server 10.201.217.6:8585;
+}
+upstream qingguo-linkapi {
+    server 10.165.153.134:8686;
+    server 10.165.153.136:8686;
+}

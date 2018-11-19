@@ -1,0 +1,6 @@
+# lofter img refer white list
+limit_access_zone zone=refer:10M bucket_number=10007 type=$host_in_refer;
+limit_access_variable zone=refer $refer_accessable_host;
+
+limit_access_zone zone=beta:10M bucket_number=10007 type=ip;
+limit_access_variable zone=beta $beta_ip;
