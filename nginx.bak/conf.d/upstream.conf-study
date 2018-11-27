@@ -1,6 +1,0 @@
-upstream study {
-   server 10.120.36.45:8010 srun_id=study1-8010;
-   server 10.120.36.48:8010 srun_id=study2-8010;
-   jvm_route $cookie_NTESSTUDYSI reverse;
-   keepalive 100;
-}

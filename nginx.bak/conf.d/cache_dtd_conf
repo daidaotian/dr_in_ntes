@@ -1,1 +1,0 @@
-proxy_cache_path  /home/srv/cache/dtdcache  levels=1:2   keys_zone=cache_dtd:256m inactive=1d max_size=512m;

@@ -1,2 +1,0 @@
-# Limit zone setting
-limit_conn_zone $server_name zone=studypat-perserver:10m;

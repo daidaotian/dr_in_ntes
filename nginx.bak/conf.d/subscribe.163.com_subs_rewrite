@@ -1,8 +1,0 @@
-rewrite "^/index.html" /v2/index.html break;
-rewrite "^/$" /v2/index.html break;
-rewrite "^/wemedia\/?$" /wemedia/index.html break;
-rewrite "^/media/(.*)$" /v2/media/$1 break;
-rewrite "^/article/(.*)/(.*)\.html$" "/v2/media/homepage/$1.html?docid=$2" break;
-rewrite "^/article/(.*)$" /v2/article/$1 break;
-rewrite "^/subscribe/(.*)$" /v2/subscribe/$1 break;
-

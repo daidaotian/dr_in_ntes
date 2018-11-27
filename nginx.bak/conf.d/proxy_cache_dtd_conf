@@ -1,7 +1,0 @@
-proxy_buffering on;
-proxy_temp_path /home/srv/cache/dtd_tmp;
-proxy_cache cache_dtd;
-proxy_cache_methods GET POST;
-proxy_cache_key $uri;
-proxy_cache_use_stale error timeout invalid_header http_500 http_502 http_503 http_504 updating;
-proxy_cache_valid 200 5m;

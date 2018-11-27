@@ -1,8 +1,0 @@
-proxy_buffering on;
-proxy_temp_path /srv/cache/cachec3g_tmp;
-proxy_cache cache_c3g;
-proxy_cache_key $uri$is_args$args;
-proxy_cache_use_stale error timeout invalid_header http_500 http_502 http_503 http_504 updating;
-proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504 http_404;
-add_header X_cache "$upstream_cache_status from $hostname";
-

@@ -1,4 +1,0 @@
-limit_access_zone zone=ddosursip:10M bucket_number=10007 type=ip;
-limit_access_zone zone=ddosursuri:10M bucket_number=10007 type=$uri;
-limit_access_variable zone=ddosursip $urs_access_deny_ip;
-limit_access_variable zone=ddosursuri $urs_access_deny_uri;

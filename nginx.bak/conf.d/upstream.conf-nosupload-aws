@@ -1,5 +1,0 @@
-upstream awstomcat {
-    consistent_hash $uri;
-    server 10.1.2.167:9000;
-    server 10.1.2.168:9000;
-}

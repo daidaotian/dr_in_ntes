@@ -1,9 +1,0 @@
-upstream coursera-s {
-    server 10.120.146.6;
-    server 10.120.146.7;
-}
-
-upstream coursera-v {
-    server 10.172.80.112:8080;
-    server 10.172.80.113:8080;
-}

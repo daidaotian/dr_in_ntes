@@ -1,9 +1,0 @@
-proxy_hide_header Cache-Control;
-proxy_hide_header Set-Cookie;
-proxy_hide_header Expires;
-proxy_ignore_headers Cache-Control Expires Set-Cookie;
-#proxy_cache_key $scheme$host$uri$is_args$args;
-proxy_cache_key $host$uri$is_args$args;
-add_header X_cache "$upstream_cache_status from $hostname";
-proxy_cache_use_stale error timeout invalid_header http_500 http_502 http_503 http_504 updating;
-

@@ -1,5 +1,0 @@
-proxy_cache_path  /mnt/ssd/cache/cachehaitao  levels=1:2   keys_zone=cache_haitao:1024m inactive=60m max_size=204800m;
-proxy_cache_path  /mnt/ssd/cache/cachehaitao2 levels=1:2   keys_zone=cache_haitao2:1024m inactive=60m max_size=204800m;
-proxy_cache_path  /mnt/ssd/cache/cachehaitao3 levels=1:2   keys_zone=cache_haitao3:1024m inactive=60m max_size=204800m;
-proxy_cache_path  /mnt/ssd/cache/cachehaitaowap levels=1:2   keys_zone=cache_haitao_wap:1024m inactive=60m max_size=204800m;
-proxy_cache_path  /mnt/ssd/cache/cachehaitaopages levels=1:2   keys_zone=cache_haitao_pages:1024m inactive=60m max_size=204800m;

@@ -1,5 +1,0 @@
-upstream nschedule {
-    server 10.122.140.171:1086;
-    server 10.122.140.172:1087;
-    keepalive 16;
-}

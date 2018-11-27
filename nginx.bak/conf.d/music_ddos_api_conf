@@ -1,9 +1,0 @@
-# ddos related zone
-limit_access_zone zone=ddosmusicip:40M bucket_number=100000 type=ip;
-limit_access_zone zone=ddosmusicip2:40M bucket_number=100000 type=$http_x_from_ip;
-limit_access_zone zone=ddosmusicuri:10M bucket_number=10007 type=$uri;
-limit_access_zone zone=ddosmusicuri2:10M bucket_number=10007 type=$uri2;
-limit_access_variable zone=ddosmusicip $music_access_deny_ip;
-limit_access_variable zone=ddosmusicip2 $music_access_deny_ip2;
-limit_access_variable zone=ddosmusicuri $music_access_deny_uri;
-limit_access_variable zone=ddosmusicuri2 $music_access_deny_uri2;

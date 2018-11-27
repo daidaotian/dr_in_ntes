@@ -1,8 +1,0 @@
-aio threads;
-proxy_buffering on;
-proxy_cache_lock on;
-proxy_temp_path /mnt/ssd/cache/cachehaitao2_tmp;
-proxy_cache cache_haitao2;
-proxy_cache_methods GET POST;
-proxy_cache_key $env$uri?navindex=$arg_navindex;
-proxy_cache_use_stale error timeout invalid_header http_500 http_502 http_503 http_504 updating;

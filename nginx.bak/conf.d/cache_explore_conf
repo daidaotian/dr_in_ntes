@@ -1,1 +1,0 @@
-proxy_cache_path  /srv/cache/cachecexplore  levels=1:2   keys_zone=cache_explore:256m inactive=1d max_size=6144m;
